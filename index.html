@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CMA演習">
+<title>証券アナリスト 2次試験 問題演習</title>
+<style>
+:root{
+  --navy:#0D1B3E;--navy-mid:#1A3160;--navy-lt:#243D6E;
+  --gold:#C9943C;--gold-lt:#F0C96A;
+  --s3:#C0392B;--s3bg:#FADBD8;--s3dk:#791F1F;
+  --s2:#C9943C;--s2bg:#FEF9E7;--s2dk:#633806;
+  --s1:#6B7A99;--s1bg:#EEF0F5;--s1dk:#444441;
+  --green:#085041;--greenbg:#E1F5EE;--greenborder:#1D9E75;
+  --redbg:#FCEBEB;--redborder:#A32D2D;
+  --bg:#F8F9FB;--card:#FFFFFF;
+  --text:#1A1A2E;--text2:#6B7A99;--text3:#9BA3B8;
+  --border:#E2E5EF;--border2:#CBD0E0;
+  --radius:12px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+/* Header */
+.header{background:var(--navy);padding:env(safe-area-inset-top) 0 0;position:sticky;top:0;z-index:100}
+.header-inner{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.header h1{font-size:17px;font-weight:600;color:#fff;flex:1}
+.header-badge{background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+/* Tab bar */
+.tabs{display:flex;background:var(--navy-mid);padding:0 16px}
+.tab{flex:1;padding:10px 0;font-size:12px;color:rgba(255,255,255,0.6);text-align:center;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.tab.active{color:#fff;border-bottom-color:var(--gold)}
+/* Main content */
+.main{padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom));max-width:600px;margin:0 auto}
+/* Filter bar */
+.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+select{font-size:12px;padding:7px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--card);color:var(--text);-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B7A99'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px;cursor:pointer}
+/* Stats row */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.stat{background:var(--card);border-radius:var(--radius-sm);padding:10px 8px;text-align:center;border:1px solid var(--border)}
+.stat-val{font-size:20px;font-weight:700;color:var(--text)}
+.stat-lbl{font-size:10px;color:var(--text2);margin-top:2px}
+/* Progress */
+.prog-wrap{height:4px;background:var(--border);border-radius:2px;margin-bottom:14px;overflow:hidden}
+.prog-fill{height:100%;background:var(--greenborder);border-radius:2px;transition:width 0.4s}
+/* Question card */
+.qcard{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--border);margin-bottom:12px}
+.qmeta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
+.b3{background:var(--s3bg);color:var(--s3dk)}
+.b2{background:var(--s2bg);color:var(--s2dk)}
+.b1{background:var(--s1bg);color:var(--s1dk)}
+.bunit{background:#EEF0F5;color:var(--navy-mid);font-size:11px;padding:3px 9px;border-radius:20px}
+.btype{background:#F0F4FF;color:var(--navy-lt);font-size:10px;padding:2px 7px;border-radius:20px}
+.qnum{font-size:12px;color:var(--text2);margin-left:auto}
+.qtext{font-size:15px;font-weight:500;line-height:1.7;color:var(--text);margin-bottom:14px}
+/* Choices */
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);cursor:pointer;background:var(--card);text-align:left;width:100%;transition:background 0.15s,border-color 0.15s;-webkit-appearance:none}
+.choice:active:not([disabled]){background:#F0F4FF}
+.choice[disabled]{cursor:default}
+.cletter{font-size:13px;font-weight:600;color:var(--text2);min-width:18px;margin-top:1px;flex-shrink:0}
+.ctext{font-size:14px;color:var(--text);line-height:1.55}
+.choice.correct{border-color:var(--greenborder);background:var(--greenbg)}
+.choice.correct .cletter,.choice.correct .ctext{color:var(--green)}
+.choice.wrong{border-color:var(--redborder);background:var(--redbg)}
+.choice.wrong .cletter,.choice.wrong .ctext{color:var(--s3dk)}
+.choice.reveal{border-color:var(--greenborder);background:var(--greenbg)}
+.choice.reveal .cletter,.choice.reveal .ctext{color:var(--green)}
+/* Explanation */
+.exp{margin-top:12px;padding:12px 14px;background:#F0F6FF;border-radius:var(--radius-sm);border-left:3px solid #378ADD;display:none}
+.exp-lbl{font-size:11px;font-weight:600;color:#185FA5;margin-bottom:5px}
+.exp-txt{font-size:13px;color:var(--text);line-height:1.7}
+/* Actions */
+.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{padding:10px 18px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--card);color:var(--text);font-size:14px;cursor:pointer;font-weight:500;-webkit-appearance:none}
+.btn:active{opacity:0.8}
+.btn-p{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn-g{background:var(--greenborder);border-color:var(--greenborder);color:#fff}
+/* Result screen */
+.result{text-align:center;padding:24px 16px}
+.rscore{font-size:64px;font-weight:700;color:var(--text);line-height:1}
+.rscore span{font-size:28px}
+.rmsg{font-size:14px;color:var(--text2);margin:8px 0 20px}
+.rbreakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+/* History */
+.hist-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border)}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-ok{background:var(--greenborder)}
+.dot-ng{background:var(--redborder)}
+.hist-q{font-size:12px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Unit stats */
+.unit-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.ubar-wrap{width:72px;height:6px;background:var(--border);border-radius:3px;overflow:hidden;flex-shrink:0}
+.ubar{height:100%;border-radius:3px}
+.unit-pct{font-size:13px;font-weight:600;min-width:36px;text-align:right}
+/* Panes */
+.pane{display:none}
+.pane.active{display:block}
+/* Welcome */
+.welcome{text-align:center;padding:32px 16px}
+.welcome h2{font-size:22px;font-weight:700;margin-bottom:8px}
+.welcome p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.feature{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;text-align:left}
+.feature-icon{font-size:20px;margin-bottom:6px}
+.feature-title{font-size:13px;font-weight:600;margin-bottom:4px}
+.feature-desc{font-size:11px;color:var(--text2);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>証券アナリスト 2次試験</h1>
+    <span class="header-badge">演習アプリ</span>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('quiz')">問題演習</div>
+    <div class="tab" onclick="switchTab('hist')">履歴</div>
+    <div class="tab" onclick="switchTab('stats')">成績</div>
+    <div class="tab" onclick="switchTab('info')">使い方</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- QUIZ PANE -->
+<div class="pane active" id="pane-quiz">
+  <div class="filters">
+    <select id="fUnit" onchange="restart()"><option value="all">全単元</option></select>
+    <select id="fImp" onchange="restart()">
+      <option value="all">全重要度</option>
+      <option value="3">★★★ 必ず出る</option>
+      <option value="2">★★ 頻出</option>
+      <option value="1">★ 標準</option>
+    </select>
+    <select id="fType" onchange="restart()">
+      <option value="all">全タイプ</option>
+      <option value="concept">概念・記述</option>
+      <option value="calc">計算問題</option>
+    </select>
+    <select id="fCnt" onchange="restart()">
+      <option value="5">5問</option>
+      <option value="10" selected>10問</option>
+      <option value="20">20問</option>
+      <option value="999">全問</option>
+    </select>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val" id="st0">0</div><div class="stat-lbl">回答済み</div></div>
+    <div class="stat"><div class="stat-val" id="st1">0</div><div class="stat-lbl">正解</div></div>
+    <div class="stat"><div class="stat-val" id="st2">-%</div><div class="stat-lbl">正解率</div></div>
+    <div class="stat"><div class="stat-val" id="st3">-</div><div class="stat-lbl">残り</div></div>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  <div id="qcard"></div>
+</div>
+
+<!-- HISTORY PANE -->
+<div class="pane" id="pane-hist">
+  <div class="qcard" id="hist-body" style="min-height:200px"></div>
+</div>
+
+<!-- STATS PANE -->
+<div class="pane" id="pane-stats">
+  <div class="qcard" id="stats-body" style="min-height:200px"></div>
+</div>
+
+<!-- INFO PANE -->
+<div class="pane" id="pane-info">
+  <div class="qcard">
+    <div style="font-size:16px;font-weight:600;margin-bottom:14px">使い方 &amp; 活用ガイド</div>
+    <div style="font-size:13px;line-height:1.8;color:var(--text)">
+      <p style="margin-bottom:10px"><strong>毎日の学習ルーティン（推奨）</strong></p>
+      <p style="margin-bottom:6px">① ★★★フィルターで10問 → 基礎確認（10分）</p>
+      <p style="margin-bottom:6px">② その日学んだ単元を絞って10問 → 理解確認（15分）</p>
+      <p style="margin-bottom:16px">③ 計算問題フィルターで5問 → 計算力維持（10分）</p>
+      <p style="margin-bottom:10px"><strong>重要度の見方</strong></p>
+      <p style="margin-bottom:6px">★★★ 毎年出題・計算必須 → 最優先で完全習得</p>
+      <p style="margin-bottom:6px">★★  頻出・2年に1回 → しっかり理解</p>
+      <p style="margin-bottom:16px">★   標準 → 余裕があれば押さえる</p>
+      <p style="margin-bottom:10px"><strong>記述式試験への対応</strong></p>
+      <p style="margin-bottom:6px">解説を読んで「なぜそうなるか」を言葉で説明できるか確認してください。答えが合っていても理由を書けなければ二次試験では得点になりません。</p>
+      <p style="margin-bottom:16px">解説の定型文（「〜のため〜となる」）を声に出して読む練習が効果的です。</p>
+      <p style="margin-bottom:10px"><strong>フェーズ別学習計画</strong></p>
+      <p style="margin-bottom:4px">〜4月前半：第3章（経済）を完成</p>
+      <p style="margin-bottom:4px">4月後半〜5月：第2章（財務）を攻略</p>
+      <p style="margin-bottom:4px">5月：第1章（証券分析）★★★を固める</p>
+      <p style="margin-bottom:16px">5月後半〜6月：倫理＋全科目弱点補強</p>
+      <p style="color:var(--text2);font-size:12px">v2.0 — 問題数: 60問収録（随時更新予定）</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const QDB = [
+// ═══════════════════════════════════════════════
+// 第1章 証券分析とポートフォリオ・マネジメント
+// ═══════════════════════════════════════════════
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"concept",
+ q:"ゴードン成長モデル（定率成長DDM）の理論株価P₀として正しい式はどれか。D₁=来期配当、r=割引率、g=成長率。",
+ ch:["P₀ = D₁×(r+g)","P₀ = D₁÷(r−g)","P₀ = D₁÷(r+g)","P₀ = D₀÷(r−g)"],a:1,
+ e:"P₀=D₁/(r−g)。前提：r>g。g=ROE×内部留保率（b）。最頻出の株式評価公式。r−gの差が小さいほど株価が高くなる。"},
+
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】来期配当D₁=100円、割引率r=8%、配当成長率g=3%のとき、ゴードン成長モデルによる理論株価はいくらか。",
+ ch:["1,000円","1,250円","2,000円","3,333円"],a:2,
+ e:"P₀=D₁/(r−g)=100/(0.08−0.03)=100/0.05=2,000円。r−g=5%が分母。g↑やr↓で株価は大きく上昇する。"},
+
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"concept",
+ q:"CAPMの期待収益率の計算式として正しいものはどれか。",
+ ch:["E(R)=Rf+β÷(Rm−Rf)","E(R)=Rf+β×(Rm−Rf)","E(R)=β×Rf+(Rm−Rf)","E(R)=Rm+β×Rf"],a:1,
+ e:"CAPM：E(R)=Rf+β×(Rm−Rf)。β×(Rm−Rf)がリスクプレミアム。β=1なら市場と同じリターン。WACCの株主資本コスト算出に必須。"},
+
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】Rf=2%、市場リスクプレミアム=6%、β=1.5のとき、CAPMによる期待収益率はいくらか。",
+ ch:["8.0%","9.0%","11.0%","13.0%"],a:2,
+ e:"E(R)=2%+1.5×6%=2%+9%=11.0%。β=1.5は市場より1.5倍リスクが高いことを示し、リターンも1.5倍のリスクプレミアムが要求される。"},
+
+{u:"1-1 株式評価",c:"証券分析・PM",i:2,t:"concept",
+ q:"効率的市場仮説のセミストロング形式（準強形）が成立する場合、以下のどれを行っても超過リターンを継続的に得ることはできないか。",
+ ch:["テクニカル分析（過去の株価データ分析）のみ","ファンダメンタル分析（公開財務情報の分析）のみ","テクニカル分析もファンダメンタル分析も","インサイダー情報を活用した取引"],a:2,
+ e:"準強形では過去価格情報＋すべての公開情報が既に価格に反映済み。よってテクニカル分析もファンダメンタル分析も超過リターン不可。インサイダー情報（非公開）は強形でないと有効だが違法。"},
+
+{u:"1-1 株式評価",c:"証券分析・PM",i:2,t:"calc",
+ q:"【計算】PBR=2.5倍、ROE=15%のとき、PERはいくらか（PBR=ROE×PERの関係を使用）。",
+ ch:["約6.7倍","約10倍","約16.7倍","約37.5倍"],a:2,
+ e:"PBR=ROE×PER → PER=PBR/ROE=2.5/0.15≒16.7倍。この関係式は財務分析と株式評価を結ぶ重要な式。ROEが高いほど同じPBRでもPERが低い（割安）ことを示す。"},
+
+{u:"1-2 パフォーマンス評価",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】ポートフォリオ収益率=9%、無リスク利率=1%、標準偏差=20%のとき、シャープレシオはいくらか。",
+ ch:["0.25","0.40","0.45","0.80"],a:1,
+ e:"シャープレシオ=(Rp−Rf)/σp=(9%−1%)/20%=8%/20%=0.40。0.5以上なら優秀、1.0以上なら非常に優秀とされる。"},
+
+{u:"1-2 パフォーマンス評価",c:"証券分析・PM",i:3,t:"concept",
+ q:"時間加重収益率（TWR）と金額加重収益率（MWR）について、運用者の実力を正しく評価できるのはどちらか。その理由も含め正しいものはどれか。",
+ ch:["MWR。投資家の実際の収益体験を反映するため","TWR。資金の追加・引き出しの影響を排除し、運用者が管理できる部分のみを評価するため","どちらも同じ結果になるため差がない","MWR。IRRと同義で計算が簡単なため"],a:1,
+ e:"TWR（時間加重）：各期間の収益率の積で計算。資金流出入の影響を排除→運用者の実力評価に適切。MWR（金額加重＝IRR）：大きな金額を投資した期間の影響が大きい→投資家の実際の体験に近い。GIPSではTWRを採用。"},
+
+{u:"1-2 パフォーマンス評価",c:"証券分析・PM",i:2,t:"calc",
+ q:"【計算】情報比（IR）の計算：アクティブリターン（α）=2%、トラッキングエラー（TE）=4%のとき、情報比はいくらか。",
+ ch:["0.25","0.50","0.75","2.00"],a:1,
+ e:"IR=α/TE=2%/4%=0.50。IR>0.5は優秀、IR>1.0は非常に優秀。シャープレシオがパッシブ基準なのに対し、IRはアクティブ運用の効率性を測る指標。"},
+
+{u:"1-3 債券分析",c:"証券分析・PM",i:3,t:"concept",
+ q:"修正デュレーション(D*)と債券価格変化の近似関係として正しいものはどれか。",
+ ch:["ΔP/P ≒ D*×Δy","ΔP/P ≒ −D*×Δy","ΔP/P ≒ D*/Δy","ΔP/P ≒ Δy/D*"],a:1,
+ e:"ΔP/P≒−D*×Δy。マイナス符号が重要（利回り↑→価格↓）。修正D=マコーレーD/(1+y)。コンベクシティ補正：ΔP/P≒−D*×Δy+½×C×(Δy)²"},
+
+{u:"1-3 債券分析",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】修正デュレーション=8、利回りが0.5%低下した場合の債券価格変化率は約いくらか。",
+ ch:["−4%","−1%","+4%","+8%"],a:2,
+ e:"ΔP/P≒−D*×Δy=−8×(−0.005)=+0.04=+4%。利回り低下→価格上昇。デュレーションが大きいほど金利変動への感応度が高い（長期債・低クーポン債ほどD大）。"},
+
+{u:"1-3 債券分析",c:"証券分析・PM",i:2,t:"concept",
+ q:"イールドカーブの逆イールド（右下がり）が示す市場の期待として、期待理論上の解釈として正しいものはどれか。",
+ ch:["将来の短期金利は現在より上昇すると市場が期待している","将来の短期金利は現在より低下すると市場が期待している（景気後退シグナル）","長期債への需要超過が生じているだけで期待とは無関係","流動性プレミアムにより長期金利が低くなっている"],a:1,
+ e:"期待理論：長期金利=将来の短期金利期待値の平均。逆イールド→将来の短期金利低下期待（＝景気後退・利下げ期待）。歴史的に逆イールドは景気後退の先行指標とされ、投資家にとって重要なシグナル。"},
+
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:3,t:"concept",
+ q:"プットコールパリティ（PCパリティ）の式として正しいものはどれか。C=コール価格、P=プット価格、S=原資産価格、K=行使価格。",
+ ch:["C+P=S+PV(K)","C−P=S−PV(K)","C+PV(K)=P+S","C−P=K−S"],a:1,
+ e:"PCパリティ：C−P=S−PV(K)。同一原資産・行使価格・満期のコールとプット間で必ず成立。変形してP=C−S+PV(K)など出題される。裁定が働き均衡を保つ。"},
+
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】コール価格C=8円、原資産S=100円、行使価格K=100円（PV(K)=98円）のとき、プットコールパリティによるプット価格はいくらか。",
+ ch:["2円","6円","8円","10円"],a:1,
+ e:"PCパリティ：C−P=S−PV(K) → 8−P=100−98=2 → P=6円。ATM（S=K）では配当なしの場合C>Pとなる（金利効果）。このような計算でコール価格からプット価格を導出できる。"},
+
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:3,t:"concept",
+ q:"オプションのデルタ（Δ）の説明として正しいものはどれか。",
+ ch:["原資産価格が1単位変化したときのオプション価値の変化量","時間経過によるオプション価値の減少量","ボラティリティ1%変化に対するオプション価値の変化量","デルタの変化率（ガンマ）"],a:0,
+ e:"デルタ=∂C/∂S。コールのΔ：0〜1（ATMで≒0.5）、プットのΔ：−1〜0。デルタヘッジ：保有オプションのΔ×株数だけ原資産を売買してニュートラルに保つ戦略。"},
+
+{u:"1-5 資産配分",c:"証券分析・PM",i:3,t:"concept",
+ q:"効率的フロンティアにおいて、シャープレシオが最大となるポートフォリオを何というか。その特性も含めて正しいものはどれか。",
+ ch:["最小分散ポートフォリオ。リスクが最小になる点","接点ポートフォリオ。資本市場線とリスク資産フロンティアの接点でシャープレシオ最大","等加重ポートフォリオ。すべての資産を均等配分","リスクパリティ。各資産のリスク寄与度を均等化"],a:1,
+ e:"接点ポートフォリオ：CML（資本市場線）と効率的フロンティアの接点。シャープレシオ最大。このポートフォリオと無リスク資産を組み合わせることで、あらゆるリスク水準で最も効率的なポートフォリオが作れる（トービンの分離定理）。"},
+
+{u:"1-6 国際証券投資",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】米国株式の現地収益率=10%、円安（円が5%減価）のとき、円建ての概算総収益率はいくらか。",
+ ch:["5%","10%","15%","50%"],a:2,
+ e:"円建て総収益率≒現地収益率+為替変化率=10%+5%=15%（近似式）。正確には(1.10×1.05)−1=15.5%。円安→外貨建て資産の円換算価値が増加。円高の場合は逆にリターンが減少する。"},
+
+{u:"1-7 オルタナティブ",c:"証券分析・PM",i:2,t:"concept",
+ q:"ヘッジファンドの「2-20」報酬体系について正しいものはどれか。",
+ ch:["年間リターン2%超の部分の20%を報酬とする","運用資産の2%を管理報酬、利益の20%を成功報酬とする（ハイウォーターマーク付き）","運用資産の2%を成功報酬、20%を管理報酬とする","リターンが20%超のとき2%の追加報酬が発生する"],a:1,
+ e:"2-20：管理報酬=AUMの2%/年、成功報酬=利益の20%。ハイウォーターマーク（過去最高純資産）超えた部分にのみ成功報酬。投資家と運用者の利益を一致させる仕組みだが、運用者がリスクを過度に取る誘因にもなりうる。"},
+
+{u:"1-8 行動ファイナンス",c:"証券分析・PM",i:3,t:"concept",
+ q:"プロスペクト理論における損失回避バイアスの説明として正しいものはどれか。",
+ ch:["利益と損失を同等に評価する","損失の心理的痛みは同額の利益の喜びの約2倍大きく、これが投資判断を歪める","損失を完全に回避しようとして投資を控える","過去の損失実績を忘れて再び同じ失敗を繰り返す"],a:1,
+ e:"損失回避：損失の痛みは同額の利益の喜びの約2倍（カーネマン＆トベルスキー）。これにより「損切りができない（損失確定を避ける）」「早すぎる利益確定」といった投資行動の歪みが生じる。記述では「非対称的な価値関数により損失忌避が生じる」と書く。"},
+
+// ═══════════════════════════════════════════════
+// 第2章 財務分析・コーポレートファイナンス
+// ═══════════════════════════════════════════════
+{u:"2-1 コーポレートF",c:"財務分析",i:3,t:"calc",
+ q:"【計算】株主資本100億円（Re=10%）、有利子負債200億円（Rd=4%、税率30%）の企業のWACCはいくらか。",
+ ch:["4.5%","5.2%","6.0%","8.0%"],a:1,
+ e:"WACC=100/300×10%+200/300×4%×(1−0.3)=3.33%+1.87%=5.2%。節税効果（1−t）を必ず掛ける。負債比率が高いほどWACCは下がるが、財務リスクも増加することに注意（修正MM）。"},
+
+{u:"2-1 コーポレートF",c:"財務分析",i:3,t:"concept",
+ q:"MM理論（法人税なし）の第一命題として正しいものはどれか。",
+ ch:["最適な負債比率が存在し企業価値が最大化される","完全市場では資本構成は企業価値に無関係（レバレッジ無関連命題）","負債コストは常に株主資本コストより低い","配当政策によって企業価値は変化する"],a:1,
+ e:"MM命題Ⅰ（税なし）：完全市場では企業価値は資本構成に無関係。理由：裁定取引が割安・割高を解消。法人税導入→節税効果（タックスシールド）で負債活用が有利（修正MM）。ただし過度な負債は財務困難コストでその効果が消滅。"},
+
+{u:"2-1 コーポレートF",c:"財務分析",i:3,t:"calc",
+ q:"【計算】ハマダ方程式でβU（アンレバードβ）=0.8、D/E=1.0（負債株主資本比率）、税率30%のとき、βL（レバードβ）はいくらか。",
+ ch:["0.80","1.04","1.36","1.60"],a:2,
+ e:"βL=βU×[1+(1−t)×D/E]=0.8×[1+(1−0.3)×1.0]=0.8×1.7=1.36。財務レバレッジが高まるほど株主の負担するリスクが増加し、βLが大きくなる。"},
+
+{u:"2-1 コーポレートF",c:"財務分析",i:2,t:"concept",
+ q:"NPV法とIRR法を相互排他的プロジェクト（どちらか一方のみ採択）の評価に使う場合、理論的に優れるのはどちらか。その理由として正しいものはどれか。",
+ ch:["IRR法。計算が簡単で直感的に理解しやすいため","NPV法。再投資率の仮定が資本コストであり現実的で、投資規模の違いを適切に反映するため","IRR法。複数解が存在しない場合は常に正確な評価ができるため","どちらも同じ結果になるため差がない"],a:1,
+ e:"NPV法の優位性：①再投資率=資本コスト（IRR法はIRRで再投資と仮定→非現実的） ②投資規模の違いを反映 ③複数解問題なし。相互排他的プロジェクトではNPVが高い方を選ぶのが理論的に正しい。"},
+
+{u:"2-2 会計制度",c:"財務分析",i:3,t:"concept",
+ q:"IFRS第15号の収益認識5ステップの正しい順序はどれか。",
+ ch:["履行義務の識別→契約の識別→取引価格算定→配分→認識","契約の識別→履行義務の識別→取引価格算定→配分→認識","契約の識別→取引価格算定→履行義務の識別→配分→認識","取引価格算定→契約の識別→履行義務の識別→配分→認識"],a:1,
+ e:"5ステップ：①契約の識別→②履行義務の識別→③取引価格の算定→④履行義務への配分→⑤収益認識（履行義務充足時）。日本基準の収益認識会計基準もほぼ同様。"},
+
+{u:"2-2 会計制度",c:"財務分析",i:3,t:"concept",
+ q:"IFRS16「リース」における借手の会計処理として正しいものはどれか。",
+ ch:["すべてのリースを費用処理（オフバランス）","原則すべてのリースをオンバランス（使用権資産・リース負債を計上）","ファイナンスリースのみオンバランス","オペレーティングリースのみオンバランス"],a:1,
+ e:"IFRS16：借手は原則すべてのリースで「使用権資産」と「リース負債」をBSに計上。例外：①短期リース（12ヶ月以下）②少額資産。財務指標（負債比率・ROA等）に大きく影響。日本基準との主要差異。"},
+
+{u:"2-3 財務諸表分析",c:"財務分析",i:3,t:"concept",
+ q:"ROEのデュポン3分解として正しいものはどれか。",
+ ch:["ROE=売上高利益率×総資産回転率×財務レバレッジ","ROE=売上高利益率×自己資本回転率×負債比率","ROE=EBITDA/売上高×資産回転率×財務レバレッジ","ROE=純利益率×売上高成長率×財務レバレッジ"],a:0,
+ e:"デュポン3分解：ROE=(純利益/売上高)×(売上高/総資産)×(総資産/自己資本)=純利益率×資産回転率×財務レバレッジ。ROE向上の3経路：①収益性改善 ②資産効率向上 ③レバレッジ増加（リスク↑）。"},
+
+{u:"2-3 財務諸表分析",c:"財務分析",i:3,t:"calc",
+ q:"【計算】純利益5億円、売上高50億円、総資産100億円、自己資本25億円のとき、ROEはいくらか。デュポン分解で求めよ。",
+ ch:["5%","10%","20%","25%"],a:2,
+ e:"純利益率=5/50=10%、資産回転率=50/100=0.5回、財務レバレッジ=100/25=4倍。ROE=10%×0.5×4=20%。直接計算：ROE=5/25=20%（一致）。デュポン分解により改善余地を分析できる。"},
+
+{u:"2-3 財務諸表分析",c:"財務分析",i:2,t:"calc",
+ q:"【計算】インタレストカバレッジレシオ（ICR）の計算：EBIT=300百万円、支払利息=60百万円のとき、ICRはいくらか。また財務健全性の判断は？",
+ ch:["ICR=3倍（やや危険）","ICR=5倍（健全）","ICR=20倍（非常に健全）","ICR=0.2倍（危険）"],a:1,
+ e:"ICR=EBIT/支払利息=300/60=5倍。一般に3倍以上で健全、1倍未満は利息を営業利益で賄えず危険。格付け機関も重視する指標。5倍なら十分健全だが、業種や景気変動による利益変動リスクも考慮が必要。"},
+
+// ═══════════════════════════════════════════════
+// 第3章 市場と経済の分析
+// ═══════════════════════════════════════════════
+{u:"3-1 マクロ経済学",c:"市場と経済",i:3,t:"calc",
+ q:"【計算】c（限界消費性向）=0.8のとき、政府支出乗数と税乗数はそれぞれいくらか。",
+ ch:["政府支出乗数=4、税乗数=−3","政府支出乗数=5、税乗数=−4","政府支出乗数=4、税乗数=3（プラス）","政府支出乗数=5、税乗数=3（プラス）"],a:1,
+ e:"政府支出乗数=1/(1−c)=1/0.2=5。税乗数=−c/(1−c)=−0.8/0.2=−4（マイナスに注意！）。税乗数の絶対値は政府支出乗数より1小さい。均衡予算乗数（ΔG=ΔT）=1。"},
+
+{u:"3-1 マクロ経済学",c:"市場と経済",i:3,t:"concept",
+ q:"流動性の罠（LM水平）のとき、財政・金融政策の効果について正しいものはどれか。",
+ ch:["財政無効・金融最大効果","財政最大効果・金融無効","両方有効","両方無効"],a:1,
+ e:"LM水平＝流動性の罠：r=最底水準で固定。財政政策：IS右シフトしてもrが上昇しない→クラウドアウトゼロ→最大効果。金融政策：M↑してもrが下がらない→LM右シフト無効。LM垂直（古典派）は財政✗金融◎で真逆。"},
+
+{u:"3-1 マクロ経済学",c:"市場と経済",i:3,t:"concept",
+ q:"マンデル＝フレミングモデルで変動相場制のとき、財政政策を発動するとどうなるか。",
+ ch:["IS右シフト→r↑→Y増加する","G↑→IS右→r↑→資本流入→円高→輸出↓→IS左に戻る→効果ゼロ","G↑→IS右→LM右シフトも誘発→Y大幅増","G↑→IS右→r低下→Y増加する"],a:1,
+ e:"変動相場×財政政策：G↑→IS右→r↑→資本流入→円高→輸出競争力↓→ISが左に戻る→Y変化なし（無効）。変動相場では金融政策が有効（M↑→r↓→円安→輸出↑→IS右→Y↑）。"},
+
+{u:"3-1 マクロ経済学",c:"市場と経済",i:2,t:"concept",
+ q:"AS-ADモデルでスタグフレーションが発生するメカニズムとして正しいものはどれか。",
+ ch:["AD曲線の右シフトによりY↑P↑が生じること","AS曲線の左シフトによりY↓P↑が同時に生じること（石油危機が典型例）","LM曲線の左シフトによりr↑Y↓が生じること","フィリップス曲線上を右上に移動すること"],a:1,
+ e:"スタグフレーション：石油危機等でコスト上昇→AS左シフト→Y↓（不況・失業増）かつP↑（インフレ）が同時発生。政策ジレンマ：AD拡大→P↑↑悪化、AD縮小→Y↓↓悪化。1970年代の先進国が経験した困難な状況。"},
+
+{u:"3-2 国際金融",c:"市場と経済",i:3,t:"calc",
+ q:"【計算】日本インフレ率4%、米国インフレ率1%のとき、相対的購買力平価（PPP）による円の理論変化率はどれか。",
+ ch:["円高3%","円安3%","円高5%","円安5%"],a:1,
+ e:"相対PPP：Δe≒π国内−π海外=4%−1%=+3%（円安3%）。インフレ率が高い国の通貨は購買力が低下し安くなる。この関係は長期では成立するが短期では金利差や資本フローが支配する。"},
+
+{u:"3-2 国際金融",c:"市場と経済",i:3,t:"concept",
+ q:"マーシャル＝ラーナー条件と関連するJカーブ効果の説明として正しいものはどれか。",
+ ch:["円安直後から経常収支は改善し、時間とともに改善幅が縮小する","短期ではM=L条件が満たされず経常収支が悪化し、時間の経過（通常6ヶ月〜1年）とともに改善に転じる","円安になれば必ず即座に経常収支が改善する","Jカーブ効果はM=L条件が常に成立している場合に現れる"],a:1,
+ e:"Jカーブ：円安直後は取引量が短期で変えられず（契約ベース）輸入金額が増加→経常収支悪化。数ヶ月〜1年で輸出量増・輸入量減→改善。M=L条件（ηx+ηm>1）が短期には満たされないためこの遅れが生じる。"},
+
+{u:"3-2 国際金融",c:"市場と経済",i:2,t:"calc",
+ q:"【計算】カバー付き金利平価（CIP）：直物レートS=150円/ドル、r国内=3%、r海外=1%のとき、1年物先物レートはいくらか。",
+ ch:["147.06円/ドル","150.00円/ドル","152.97円/ドル","153.00円/ドル"],a:2,
+ e:"CIP：F=S×(1+r国内)/(1+r海外)=150×1.03/1.01=150×1.0198≒152.97円/ドル。日本金利>米国金利→円安方向の先物レート。フォワードプレミアム=152.97−150=2.97円。"},
+
+// ═══════════════════════════════════════════════
+// 第3章-3 ミクロ経済学
+// ═══════════════════════════════════════════════
+{u:"3-3 ミクロ経済学",c:"市場と経済",i:3,t:"calc",
+ q:"【計算】ある財の価格が1,000円から800円に値下げしたとき、需要量が100個から140個に増加した。需要の価格弾力性はいくらか。",
+ ch:["0.5","1.0","1.5","2.0"],a:1,
+ e:"%ΔP=(800−1000)/1000=−20%。%ΔQ=(140−100)/100=+40%。ε=|%ΔQ/%ΔP|=|40%/−20%|=2.0ではなく…ε=40/20=2.0。ε>1なので弾力的。価格引き下げで売上高は増加する。"},
+
+{u:"3-3 ミクロ経済学",c:"市場と経済",i:3,t:"calc",
+ q:"【計算】逆需要関数P=120−3Q、MC=30の独占企業の利潤最大化：Q*とP*を求めよ。",
+ ch:["Q*=10、P*=90","Q*=15、P*=75","Q*=20、P*=60","Q*=30、P*=30（完全競争）"],a:1,
+ e:"MR=120−6Q（傾きが2倍急）。MC=MR：30=120−6Q → Q*=15。P*=120−3×15=120−45=75。完全競争：P=MC → 30=120−3Q → Q=30（P=30）。独占は過少生産（15<30）で死荷重発生。"},
+
+{u:"3-3 ミクロ経済学",c:"市場と経済",i:3,t:"calc",
+ q:"【計算】上記独占（Q*=15、P*=75、MC=AC=30）の独占利潤と死荷重をそれぞれ求めよ。",
+ ch:["利潤=450、死荷重=225","利潤=675、死荷重=337.5","利潤=675、死荷重=225","利潤=450、死荷重=337.5"],a:1,
+ e:"利潤=(P*−AC)×Q*=(75−30)×15=45×15=675。死荷重=½×(P*−MC)×(Q競争−Q*)=½×(75−30)×(30−15)=½×45×15=337.5。この三角形面積が社会的余剰の損失。"},
+
+{u:"3-3 ミクロ経済学",c:"市場と経済",i:3,t:"concept",
+ q:"ナッシュ均衡の定義として最も正確な記述はどれか。",
+ ch:["すべてのプレイヤーの利得の合計が最大化される状態","各プレイヤーが相手の戦略を所与として、自分の戦略を一方的に変えても利得が改善しない状態","協力することで社会的最適が達成される状態","すべてのプレイヤーが支配戦略を採用している状態"],a:1,
+ e:"ナッシュ均衡：相手の戦略を所与として、どのプレイヤーも一方的に戦略を変える誘因がない状態。囚人のジレンマでは（裏切り・裏切り）がナッシュ均衡だが社会的最適（協力・協力）ではない。記述では「一方的な逸脱では利得が改善しない」という表現を使う。"},
+
+{u:"3-3 ミクロ経済学",c:"市場と経済",i:3,t:"concept",
+ q:"逆選択（Adverse Selection）の発生メカニズムとして正しいものはどれか。中古車市場（レモン問題）を例に説明せよ。",
+ ch:["売り手が品質を知らないため低品質車が流通する","買い手が品質を判別できないため市場価格が平均品質で決まり→高品質の売り手が撤退→市場に低品質のみ残る","需要超過により価格が上昇し低品質車が排除される","規制当局が品質検査を義務付けることで自然に解決される"],a:1,
+ e:"レモン問題（アカロフ）：①買い手は品質不明→平均品質ベースの価格を提示 ②高品質の売り手は「安すぎる」と売却拒否 ③市場に低品質のみ残る→価格さらに低下の悪循環→市場崩壊。対策：保証制度・第三者認証・情報開示（シグナリング）。"},
+
+{u:"3-3 ミクロ経済学",c:"市場と経済",i:2,t:"concept",
+ q:"外部不経済（負の外部性）に対するピグー税の効果を論述せよ。最も適切な説明はどれか。",
+ ch:["外部費用に等しい税を課し、私的MCを社会的MCに一致させることで過剰生産を是正し社会的最適を実現する","税収を被害者に補償することで外部性の問題を解決する","生産を完全に禁止する規制よりも社会的余剰が小さくなる","ピグー税は常に数量規制より効率的である"],a:0,
+ e:"ピグー税：外部不経済では私的MC<社会的MC→過剰生産。外部費用に等しい税=ピグー税を課す→私的MCが社会的MCまで上昇→社会的最適産出量を実現。記述では「外部費用を価格に内部化することで市場の失敗を修正する」と書く。"},
+
+{u:"3-3 ミクロ経済学",c:"市場と経済",i:2,t:"concept",
+ q:"公共財の2つの特性（非排除性と非競合性）とフリーライダー問題の関係について正しい説明はどれか。",
+ ch:["非競合性があるため政府が供給すれば効率的になる","非排除性により代金未払いの消費者を排除できないため、市場では自発的な供給が過少となる（市場の失敗）","フリーライダーは法的に禁止されているため実際には問題にならない","非競合性がある財はすべて公共財として政府が供給すべき"],a:1,
+ e:"非排除性のフリーライダー問題：「他者が費用を負担して供給してくれれば、自分は払わずに利用できる」という誘因→誰も自発的に費用負担しない→市場では過少供給。政府が供給する根拠。非競合性：消費が他者の消費量を減らさない（灯台・国防・地上波テレビ）。"},
+
+{u:"3-3 ミクロ経済学",c:"市場と経済",i:1,t:"concept",
+ q:"完全競争市場の長期均衡の特性として正しいものはどれか。",
+ ch:["超過利潤が正（プラス）で安定する","超過利潤はゼロとなり、価格は平均費用の最小点に等しい（P=ACmin）","超過利潤が負（損失）で安定する","独占と同様に価格>限界費用となる"],a:1,
+ e:"完全競争長期均衡：正の超過利潤→新規参入→価格低下→超過利潤消滅。損失→企業退出→価格上昇→損失解消。長期均衡ではP=AC（最小）=MC。これが「完全競争は社会的に効率的（死荷重ゼロ）」な理由。"},
+
+// ═══════════════════════════════════════════════
+// 第4章 職業倫理・行動基準
+// ═══════════════════════════════════════════════
+{u:"4-1 職業倫理",c:"職業倫理",i:3,t:"concept",
+ q:"アナリストがMNPI（重要未公開情報）を入手した場合の正しい行動はどれか。",
+ ch:["顧客のために積極的に取引を執行する","取引を差し控えコンプライアンス部門に報告し情報を遮断する","信頼できる一部の顧客にのみ開示する","情報が公開されるまで保有するだけなら問題ない"],a:1,
+ e:"MNPI入手時の行動：①取引の即時差し控え ②コンプライアンス部門への報告 ③チャイニーズウォール（情報障壁）の維持。顧客への選択的開示も違反。「知ったことを実行しない」が原則。"},
+
+{u:"4-1 職業倫理",c:"職業倫理",i:3,t:"concept",
+ q:"CMA職業行為基準において、アナリストが取るべき利益優先順位として正しいものはどれか。",
+ ch:["自己の利益＞顧客の利益＞所属機関の利益","顧客の利益＞所属機関の利益＞自己の利益","所属機関の利益＞顧客の利益＞自己の利益","市場の安定＞顧客の利益＞自己の利益"],a:1,
+ e:"顧客最優先義務：顧客>所属機関>自己の順。ファイデューシャリーデューティ（信任義務）の核心。利益相反が生じる場合は開示・回避・管理が必要。"},
+
+{u:"4-1 職業倫理",c:"職業倫理",i:2,t:"concept",
+ q:"フロントランニング（Front Running）の説明として正しいものはどれか。",
+ ch:["顧客注文を最優先で執行すること","顧客の大口注文情報を利用し、執行前に自己勘定で先行取引して差益を得る行為","市場開場前に先物で価格発見を行うこと","インデックス変更前にリバランスを行うこと"],a:1,
+ e:"フロントランニング：顧客注文情報を悪用し、その大口注文で価格が動く前に自己勘定で取引→利益獲得後に顧客注文を執行（顧客は不利な価格）。明確な職業行為基準違反。顧客最優先義務の正反対の行為。"},
+
+{u:"4-1 職業倫理",c:"職業倫理",i:2,t:"concept",
+ q:"GIPSコンポジット（Composite）の定義として正しいものはどれか。",
+ ch:["特定顧客の全資産を一つにまとめたもの","同一の投資目的・戦略・制約を持つポートフォリオを集めたグループ","GIPS準拠ファームの全運用資産","ベンチマーク指数の構成銘柄一覧"],a:1,
+ e:"GIPSコンポジット：同一戦略・投資目的のポートフォリオ集合体。パフォーマンス報告はコンポジット単位で行い、実績の恣意的な選択・省略を防止する。「良かった期間だけ報告する」といった意図的な歪みを排除するための仕組み。"},
+];
+
+// ═══════════════════════════════════════════════
+// App State
+// ═══════════════════════════════════════════════
+let session=[],cur=0,answered=false;
+let sStats={total:0,correct:0};
+let history=[],unitPerf={};
+
+// ═══════════════════════════════════════════════
+// Helpers
+// ═══════════════════════════════════════════════
+function stars(i){return i===3?'★★★':i===2?'★★':'★'}
+function bCls(i){return i===3?'b3':i===2?'b2':'b1'}
+function typeLbl(t){return t==='calc'?'計算':'概念・記述'}
+
+function $(id){return document.getElementById(id)}
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach((el,i)=>{
+    const ids=['quiz','hist','stats','info'];
+    el.className='tab'+(ids[i]===t?' active':'');
+  });
+  ['quiz','hist','stats','info'].forEach(id=>{
+    $('pane-'+id).className='pane'+(id===t?' active':'');
+  });
+  if(t==='hist')renderHist();
+  if(t==='stats')renderStats();
+}
+
+// ═══════════════════════════════════════════════
+// Quiz Logic
+// ═══════════════════════════════════════════════
+function restart(){
+  sStats={total:0,correct:0};
+  buildSession();
+}
+
+function buildSession(){
+  const uv=$('fUnit').value,iv=$('fImp').value,tv=$('fType').value;
+  const cnt=parseInt($('fCnt').value);
+  let pool=QDB.filter(q=>{
+    if(uv!=='all'&&!q.u.startsWith(uv))return false;
+    if(iv!=='all'&&q.i!==parseInt(iv))return false;
+    if(tv!=='all'&&q.t!==tv)return false;
+    return true;
+  }).sort(()=>Math.random()-0.5);
+  session=pool.slice(0,Math.min(cnt,pool.length));
+  cur=0;answered=false;
+  if(session.length===0){
+    $('qcard').innerHTML='<div style="padding:1.2rem;color:var(--text2);font-size:14px;text-align:center">条件に合う問題がありません。<br>フィルターを変更してください。</div>';
+    return;
+  }
+  updateStats();renderQ();
+}
+
+function updateStats(){
+  const d=sStats.total,ok=sStats.correct;
+  $('st0').textContent=d;
+  $('st1').textContent=ok;
+  $('st2').textContent=d>0?Math.round(ok/d*100)+'%':'-%';
+  $('st3').textContent=Math.max(0,session.length-cur);
+  $('prog').style.width=session.length>0?Math.round(cur/session.length*100)+'%':'0%';
+}
+
+function renderQ(){
+  if(cur>=session.length){showResult();return;}
+  const q=session[cur];answered=false;
+  const L=['A','B','C','D'];
+  const choicesHtml=q.ch.map((c,i)=>`
+    <button class="choice" onclick="answer(${i})">
+      <span class="cletter">${L[i]}</span>
+      <span class="ctext">${c}</span>
+    </button>`).join('');
+  $('qcard').innerHTML=`
+    <div class="qmeta">
+      <span class="badge ${bCls(q.i)}">${stars(q.i)}</span>
+      <span class="bunit">${q.u}</span>
+      <span class="btype">${typeLbl(q.t)}</span>
+      <span class="qnum">${cur+1} / ${session.length}</span>
+    </div>
+    <div class="qtext">${q.q}</div>
+    <div class="choices" id="choices">${choicesHtml}</div>
+    <div class="exp" id="exp">
+      <div class="exp-lbl">解説</div>
+      <div class="exp-txt" id="etxt"></div>
+    </div>
+    <div class="actions" id="acts"></div>`;
+  updateStats();
+}
+
+function answer(idx){
+  if(answered)return;answered=true;
+  const q=session[cur];
+  const btns=document.querySelectorAll('.choice');
+  btns.forEach(b=>b.disabled=true);
+  const ok=idx===q.a;
+  sStats.total++;if(ok)sStats.correct++;
+  btns[idx].classList.add(ok?'correct':'wrong');
+  if(!ok)btns[q.a].classList.add('reveal');
+  $('etxt').textContent=q.e;
+  $('exp').style.display='block';
+  history.unshift({q:q.q,u:q.u,ok,i:q.i,t:q.t});
+  if(!unitPerf[q.u])unitPerf[q.u]={total:0,correct:0,i:q.i};
+  unitPerf[q.u].total++;if(ok)unitPerf[q.u].correct++;
+  const nb=document.createElement('button');
+  nb.className='btn btn-p';
+  nb.style.cssText='flex:1;min-width:140px';
+  nb.textContent=cur+1<session.length?'次の問題 →':'結果を見る →';
+  nb.onclick=()=>{cur++;renderQ();};
+  $('acts').appendChild(nb);
+  updateStats();
+}
+
+function showResult(){
+  const pct=session.length>0?Math.round(sStats.correct/session.length*100):0;
+  const msg=pct>=80?'合格圏内！この調子を維持しましょう':pct>=60?'あと一歩！頻出論点を重点復習':pct>=40?'基礎をしっかり固めましょう':'★★★論点から集中的に取り組みを';
+  const col=pct>=80?'var(--greenborder)':pct>=60?'var(--s2)':'var(--s3)';
+  $('qcard').innerHTML=`
+    <div class="result">
+      <div style="font-size:13px;color:var(--text2)">${session.length}問セッション完了</div>
+      <div class="rscore" style="color:${col}">${pct}<span>%</span></div>
+      <div class="rmsg">${msg}</div>
+      <div class="rbreakdown">
+        <div class="stat"><div class="stat-val" style="color:var(--greenborder)">${sStats.correct}</div><div class="stat-lbl">正解</div></div>
+        <div class="stat"><div class="stat-val" style="color:var(--s3)">${session.length-sStats.correct}</div><div class="stat-lbl">不正解</div></div>
+        <div class="stat"><div class="stat-val">${session.length}</div><div class="stat-lbl">合計</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn btn-p" onclick="restart()">もう一度（同条件）</button>
+        <button class="btn" onclick="$('fImp').value='3';restart()">★★★のみ再挑戦</button>
+        <button class="btn" onclick="$('fType').value='calc';restart()">計算問題のみ</button>
+        <button class="btn" onclick="switchTab('stats')">単元別成績を確認する</button>
+      </div>
+    </div>`;
+  $('prog').style.width='100%';
+}
+
+// ═══════════════════════════════════════════════
+// History & Stats
+// ═══════════════════════════════════════════════
+function renderHist(){
+  const el=$('hist-body');
+  if(history.length===0){
+    el.innerHTML='<div style="color:var(--text2);font-size:14px;padding:8px">まだ回答履歴がありません。<br>問題演習を始めてください。</div>';return;
+  }
+  el.innerHTML='<div style="font-size:13px;font-weight:600;margin-bottom:10px">直近の回答履歴</div>'+
+    history.slice(0,40).map(h=>`
+      <div class="hist-row">
+        <div class="dot ${h.ok?'dot-ok':'dot-ng'}"></div>
+        <span class="badge ${bCls(h.i)}" style="flex-shrink:0">${stars(h.i)}</span>
+        <span class="btype" style="flex-shrink:0">${typeLbl(h.t)}</span>
+        <span class="hist-q">${h.q.slice(0,50)}…</span>
+      </div>`).join('');
+}
+
+function renderStats(){
+  const el=$('stats-body');
+  const entries=Object.entries(unitPerf);
+  if(entries.length===0){
+    el.innerHTML='<div style="color:var(--text2);font-size:14px;padding:8px">まだデータがありません。<br>問題を解くと成績が表示されます。</div>';return;
+  }
+  const tot=entries.reduce((a,[,v])=>a+v.total,0);
+  const ok=entries.reduce((a,[,v])=>a+v.correct,0);
+  const pct=tot>0?Math.round(ok/tot*100):0;
+  const pctCol=pct>=80?'var(--greenborder)':pct>=60?'var(--s2)':'var(--s3)';
+  const rows=entries.sort((a,b)=>a[0].localeCompare(b[0])).map(([u,d])=>{
+    const p=Math.round(d.correct/d.total*100);
+    const c=p>=80?'var(--greenborder)':p>=60?'var(--s2)':'var(--s3)';
+    return `<div class="unit-row">
+      <span class="badge ${bCls(d.i)}" style="flex-shrink:0">${stars(d.i)}</span>
+      <span style="font-size:12px;flex:1">${u}</span>
+      <span style="font-size:11px;color:var(--text2)">${d.correct}/${d.total}</span>
+      <div class="ubar-wrap"><div class="ubar" style="width:${p}%;background:${c}"></div></div>
+      <span class="unit-pct" style="color:${c}">${p}%</span>
+    </div>`;
+  }).join('');
+  el.innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <span style="font-size:14px;font-weight:600">単元別正解率</span>
+      <span style="font-size:13px;font-weight:700;color:${pctCol}">${ok}/${tot}問 ${pct}%</span>
+    </div>${rows}`;
+}
+
+// ═══════════════════════════════════════════════
+// Init
+// ═══════════════════════════════════════════════
+function init(){
+  const sel=$('fUnit');
+  const units=[...new Set(QDB.map(q=>q.u))].sort();
+  units.forEach(u=>{
+    const o=document.createElement('option');
+    o.value=u.split(' ')[0];o.textContent=u;
+    sel.appendChild(o);
+  });
+  buildSession();
+}
+init();
+</script>
+</body>
+</html>
