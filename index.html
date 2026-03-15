@@ -14,39 +14,42 @@
   --s3:#C0392B;--s3bg:#FADBD8;--s3dk:#791F1F;
   --s2:#C9943C;--s2bg:#FEF9E7;--s2dk:#633806;
   --s1:#6B7A99;--s1bg:#EEF0F5;--s1dk:#444441;
-  --green:#085041;--greenbg:#E1F5EE;--greenborder:#1D9E75;
-  --redbg:#FCEBEB;--redborder:#A32D2D;
+  --green:#085041;--greenbg:#E1F5EE;--greenbd:#1D9E75;
+  --redbg:#FCEBEB;--redbd:#A32D2D;
   --bg:#F8F9FB;--card:#FFFFFF;
   --text:#1A1A2E;--text2:#6B7A99;--text3:#9BA3B8;
   --border:#E2E5EF;--border2:#CBD0E0;
-  --radius:12px;--radius-sm:8px;
+  --radius:12px;--rsm:8px;
+  --acc:#065A82;--acc-mid:#378ADD;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 /* Header */
-.header{background:var(--navy);padding:env(safe-area-inset-top) 0 0;position:sticky;top:0;z-index:100}
-.header-inner{display:flex;align-items:center;gap:12px;padding:14px 16px}
-.header h1{font-size:17px;font-weight:600;color:#fff;flex:1}
-.header-badge{background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
-/* Tab bar */
-.tabs{display:flex;background:var(--navy-mid);padding:0 16px}
-.tab{flex:1;padding:10px 0;font-size:12px;color:rgba(255,255,255,0.6);text-align:center;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
-.tab.active{color:#fff;border-bottom-color:var(--gold)}
-/* Main content */
-.main{padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom));max-width:600px;margin:0 auto}
-/* Filter bar */
-.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-select{font-size:12px;padding:7px 10px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--card);color:var(--text);-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B7A99'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px;cursor:pointer}
-/* Stats row */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-.stat{background:var(--card);border-radius:var(--radius-sm);padding:10px 8px;text-align:center;border:1px solid var(--border)}
-.stat-val{font-size:20px;font-weight:700;color:var(--text)}
-.stat-lbl{font-size:10px;color:var(--text2);margin-top:2px}
-/* Progress */
-.prog-wrap{height:4px;background:var(--border);border-radius:2px;margin-bottom:14px;overflow:hidden}
-.prog-fill{height:100%;background:var(--greenborder);border-radius:2px;transition:width 0.4s}
+.hdr{background:var(--navy);position:sticky;top:0;z-index:100;padding-top:env(safe-area-inset-top)}
+.hdr-inner{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.hdr h1{font-size:17px;font-weight:600;color:#fff;flex:1}
+.hdr-badge{background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+/* Tabs */
+.tabs{display:flex;background:var(--navy-mid)}
+.tab{flex:1;padding:10px 0;font-size:12px;color:rgba(255,255,255,0.55);text-align:center;cursor:pointer;border-bottom:2px solid transparent;border:none;background:none;font-family:inherit}
+.tab.on{color:#fff;border-bottom:2px solid var(--gold)}
+/* Main */
+.main{padding:16px;padding-bottom:calc(20px + env(safe-area-inset-bottom));max-width:600px;margin:0 auto}
+/* Panes */
+.pane{display:none}.pane.on{display:block}
+/* Filters */
+.filters{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--border2);border-radius:var(--rsm);background:var(--card);color:var(--text);-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B7A99'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;cursor:pointer}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:var(--rsm);padding:10px 6px;text-align:center}
+.sv{font-size:20px;font-weight:700;color:var(--text)}
+.sl{font-size:10px;color:var(--text2);margin-top:2px}
+/* Progress bar */
+.pb{height:4px;background:var(--border);border-radius:2px;margin-bottom:14px;overflow:hidden}
+.pf{height:100%;background:var(--greenbd);border-radius:2px;transition:width .3s}
 /* Question card */
-.qcard{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--border);margin-bottom:12px}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
 .qmeta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
 .badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
 .b3{background:var(--s3bg);color:var(--s3dk)}
@@ -58,144 +61,154 @@ select{font-size:12px;padding:7px 10px;border:1px solid var(--border2);border-ra
 .qtext{font-size:15px;font-weight:500;line-height:1.7;color:var(--text);margin-bottom:14px}
 /* Choices */
 .choices{display:flex;flex-direction:column;gap:8px}
-.choice{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);cursor:pointer;background:var(--card);text-align:left;width:100%;transition:background 0.15s,border-color 0.15s;-webkit-appearance:none}
+.choice{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border2);border-radius:var(--rsm);cursor:pointer;background:var(--card);text-align:left;width:100%;font-family:inherit;-webkit-appearance:none}
 .choice:active:not([disabled]){background:#F0F4FF}
 .choice[disabled]{cursor:default}
-.cletter{font-size:13px;font-weight:600;color:var(--text2);min-width:18px;margin-top:1px;flex-shrink:0}
-.ctext{font-size:14px;color:var(--text);line-height:1.55}
-.choice.correct{border-color:var(--greenborder);background:var(--greenbg)}
-.choice.correct .cletter,.choice.correct .ctext{color:var(--green)}
-.choice.wrong{border-color:var(--redborder);background:var(--redbg)}
-.choice.wrong .cletter,.choice.wrong .ctext{color:var(--s3dk)}
-.choice.reveal{border-color:var(--greenborder);background:var(--greenbg)}
-.choice.reveal .cletter,.choice.reveal .ctext{color:var(--green)}
+.cl{font-size:13px;font-weight:600;color:var(--text2);min-width:18px;margin-top:1px;flex-shrink:0}
+.ct{font-size:14px;color:var(--text);line-height:1.55}
+.choice.ok{border-color:var(--greenbd);background:var(--greenbg)}
+.choice.ok .cl,.choice.ok .ct{color:var(--green)}
+.choice.ng{border-color:var(--redbd);background:var(--redbg)}
+.choice.ng .cl,.choice.ng .ct{color:var(--s3dk)}
+.choice.rv{border-color:var(--greenbd);background:var(--greenbg)}
+.choice.rv .cl,.choice.rv .ct{color:var(--green)}
 /* Explanation */
-.exp{margin-top:12px;padding:12px 14px;background:#F0F6FF;border-radius:var(--radius-sm);border-left:3px solid #378ADD;display:none}
-.exp-lbl{font-size:11px;font-weight:600;color:#185FA5;margin-bottom:5px}
+.exp{margin-top:12px;padding:12px 14px;background:#F0F6FF;border-radius:var(--rsm);border-left:3px solid var(--acc-mid);display:none}
+.exp-lbl{font-size:11px;font-weight:600;color:var(--acc);margin-bottom:5px}
 .exp-txt{font-size:13px;color:var(--text);line-height:1.7}
 /* Actions */
-.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.btn{padding:10px 18px;border:1.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--card);color:var(--text);font-size:14px;cursor:pointer;font-weight:500;-webkit-appearance:none}
-.btn:active{opacity:0.8}
+.acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{padding:10px 18px;border:1.5px solid var(--border2);border-radius:var(--rsm);background:var(--card);color:var(--text);font-size:14px;cursor:pointer;font-weight:500;font-family:inherit;-webkit-appearance:none}
+.btn:active{opacity:.8}
 .btn-p{background:var(--navy);border-color:var(--navy);color:#fff}
-.btn-g{background:var(--greenborder);border-color:var(--greenborder);color:#fff}
-/* Result screen */
+/* Result */
 .result{text-align:center;padding:24px 16px}
-.rscore{font-size:64px;font-weight:700;color:var(--text);line-height:1}
+.rscore{font-size:64px;font-weight:700;line-height:1}
 .rscore span{font-size:28px}
 .rmsg{font-size:14px;color:var(--text2);margin:8px 0 20px}
-.rbreakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.rbk{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
 /* History */
-.hist-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border)}
+.hr{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border)}
 .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.dot-ok{background:var(--greenborder)}
-.dot-ng{background:var(--redborder)}
-.hist-q{font-size:12px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dok{background:var(--greenbd)}.dng{background:var(--redbd)}
 /* Unit stats */
-.unit-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
-.ubar-wrap{width:72px;height:6px;background:var(--border);border-radius:3px;overflow:hidden;flex-shrink:0}
-.ubar{height:100%;border-radius:3px}
-.unit-pct{font-size:13px;font-weight:600;min-width:36px;text-align:right}
-/* Panes */
-.pane{display:none}
-.pane.active{display:block}
-/* Welcome */
-.welcome{text-align:center;padding:32px 16px}
-.welcome h2{font-size:22px;font-weight:700;margin-bottom:8px}
-.welcome p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
-.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
-.feature{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;text-align:left}
-.feature-icon{font-size:20px;margin-bottom:6px}
-.feature-title{font-size:13px;font-weight:600;margin-bottom:4px}
-.feature-desc{font-size:11px;color:var(--text2);line-height:1.5}
+.ur{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.ubw{width:72px;height:6px;background:var(--border);border-radius:3px;overflow:hidden;flex-shrink:0}
+.ub{height:100%;border-radius:3px}
+/* Home dashboard */
+.sec-title{font-size:12px;font-weight:600;color:var(--text2);letter-spacing:.05em;text-transform:uppercase;margin:18px 0 10px}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.kv{font-size:28px;font-weight:700}
+.kl{font-size:12px;color:var(--text2)}
+.ks{font-size:11px;color:var(--text3);margin-top:2px}
+.ring-row{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:6px}
+.ring-info .rp{font-size:26px;font-weight:700}
+.ring-info .rl{font-size:12px;color:var(--text2);margin-top:2px}
+.ring-info .rs{font-size:11px;color:var(--text3);margin-top:4px}
+.phase-bar{display:flex;border-radius:var(--rsm);overflow:hidden;height:30px;margin-bottom:6px}
+.ph{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff}
+.qbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.qbtn{padding:12px;border:1px solid var(--border);border-radius:var(--rsm);background:var(--card);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;text-align:center;-webkit-appearance:none;font-family:inherit}
+.qbtn:active{opacity:.75}
+.qbtn-p{background:var(--navy);border-color:var(--navy);color:#fff}
+.wi-list{display:flex;flex-direction:column;gap:8px}
+.wi{background:var(--card);border:1px solid var(--border);border-radius:var(--rsm);padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wi-u{flex:1;font-size:13px;font-weight:500}
+.wi-bw{width:80px;height:6px;background:var(--border);border-radius:3px;overflow:hidden;flex-shrink:0}
+.wi-b{height:100%;border-radius:3px}
+.wi-p{font-size:13px;font-weight:700;min-width:36px;text-align:right;flex-shrink:0}
+.adv{background:var(--card);border:1px solid var(--border);border-radius:var(--rsm);padding:14px;border-left:3px solid var(--acc-mid)}
+.adv-lbl{font-size:11px;color:var(--acc-mid);font-weight:600;margin-bottom:5px}
+.adv-txt{font-size:13px;line-height:1.7}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="header-inner">
+<div class="hdr">
+  <div class="hdr-inner">
     <h1>証券アナリスト 2次試験</h1>
-    <span class="header-badge">演習アプリ</span>
+    <span class="hdr-badge">演習アプリ</span>
   </div>
   <div class="tabs">
-    <div class="tab active" onclick="switchTab('quiz')">問題演習</div>
-    <div class="tab" onclick="switchTab('hist')">履歴</div>
-    <div class="tab" onclick="switchTab('stats')">成績</div>
-    <div class="tab" onclick="switchTab('info')">使い方</div>
+    <button class="tab on" onclick="go('home')">ホーム</button>
+    <button class="tab" onclick="go('quiz')">問題演習</button>
+    <button class="tab" onclick="go('hist')">履歴</button>
+    <button class="tab" onclick="go('stats')">成績</button>
+    <button class="tab" onclick="go('info')">使い方</button>
   </div>
 </div>
 
 <div class="main">
+  <!-- HOME -->
+  <div class="pane on" id="pane-home"><div id="home-body"></div></div>
 
-<!-- QUIZ PANE -->
-<div class="pane active" id="pane-quiz">
-  <div class="filters">
-    <select id="fUnit" onchange="restart()"><option value="all">全単元</option></select>
-    <select id="fImp" onchange="restart()">
-      <option value="all">全重要度</option>
-      <option value="3">★★★ 必ず出る</option>
-      <option value="2">★★ 頻出</option>
-      <option value="1">★ 標準</option>
-    </select>
-    <select id="fType" onchange="restart()">
-      <option value="all">全タイプ</option>
-      <option value="concept">概念・記述</option>
-      <option value="calc">計算問題</option>
-    </select>
-    <select id="fCnt" onchange="restart()">
-      <option value="5">5問</option>
-      <option value="10" selected>10問</option>
-      <option value="20">20問</option>
-      <option value="999">全問</option>
-    </select>
+  <!-- QUIZ -->
+  <div class="pane" id="pane-quiz">
+    <div class="filters">
+      <select id="fU" onchange="restart()"><option value="all">全単元</option></select>
+      <select id="fI" onchange="restart()">
+        <option value="all">全重要度</option>
+        <option value="3">★★★</option>
+        <option value="2">★★</option>
+        <option value="1">★</option>
+      </select>
+      <select id="fT" onchange="restart()">
+        <option value="all">全タイプ</option>
+        <option value="concept">概念・記述</option>
+        <option value="calc">計算問題</option>
+      </select>
+      <select id="fN" onchange="restart()">
+        <option value="5">5問</option>
+        <option value="10" selected>10問</option>
+        <option value="20">20問</option>
+        <option value="999">全問</option>
+      </select>
+    </div>
+    <div class="stats">
+      <div class="sc"><div class="sv" id="s0">0</div><div class="sl">回答済み</div></div>
+      <div class="sc"><div class="sv" id="s1">0</div><div class="sl">正解</div></div>
+      <div class="sc"><div class="sv" id="s2">-%</div><div class="sl">正解率</div></div>
+      <div class="sc"><div class="sv" id="s3">-</div><div class="sl">残り</div></div>
+    </div>
+    <div class="pb"><div class="pf" id="prog" style="width:0%"></div></div>
+    <div id="qcard"></div>
   </div>
-  <div class="stats">
-    <div class="stat"><div class="stat-val" id="st0">0</div><div class="stat-lbl">回答済み</div></div>
-    <div class="stat"><div class="stat-val" id="st1">0</div><div class="stat-lbl">正解</div></div>
-    <div class="stat"><div class="stat-val" id="st2">-%</div><div class="stat-lbl">正解率</div></div>
-    <div class="stat"><div class="stat-val" id="st3">-</div><div class="stat-lbl">残り</div></div>
+
+  <!-- HISTORY -->
+  <div class="pane" id="pane-hist">
+    <div class="qcard" id="hist-body" style="min-height:200px"></div>
   </div>
-  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
-  <div id="qcard"></div>
-</div>
 
-<!-- HISTORY PANE -->
-<div class="pane" id="pane-hist">
-  <div class="qcard" id="hist-body" style="min-height:200px"></div>
-</div>
+  <!-- STATS -->
+  <div class="pane" id="pane-stats">
+    <div class="qcard" id="stats-body" style="min-height:200px"></div>
+  </div>
 
-<!-- STATS PANE -->
-<div class="pane" id="pane-stats">
-  <div class="qcard" id="stats-body" style="min-height:200px"></div>
-</div>
-
-<!-- INFO PANE -->
-<div class="pane" id="pane-info">
-  <div class="qcard">
-    <div style="font-size:16px;font-weight:600;margin-bottom:14px">使い方 &amp; 活用ガイド</div>
-    <div style="font-size:13px;line-height:1.8;color:var(--text)">
-      <p style="margin-bottom:10px"><strong>毎日の学習ルーティン（推奨）</strong></p>
-      <p style="margin-bottom:6px">① ★★★フィルターで10問 → 基礎確認（10分）</p>
-      <p style="margin-bottom:6px">② その日学んだ単元を絞って10問 → 理解確認（15分）</p>
-      <p style="margin-bottom:16px">③ 計算問題フィルターで5問 → 計算力維持（10分）</p>
-      <p style="margin-bottom:10px"><strong>重要度の見方</strong></p>
-      <p style="margin-bottom:6px">★★★ 毎年出題・計算必須 → 最優先で完全習得</p>
-      <p style="margin-bottom:6px">★★  頻出・2年に1回 → しっかり理解</p>
-      <p style="margin-bottom:16px">★   標準 → 余裕があれば押さえる</p>
-      <p style="margin-bottom:10px"><strong>記述式試験への対応</strong></p>
-      <p style="margin-bottom:6px">解説を読んで「なぜそうなるか」を言葉で説明できるか確認してください。答えが合っていても理由を書けなければ二次試験では得点になりません。</p>
-      <p style="margin-bottom:16px">解説の定型文（「〜のため〜となる」）を声に出して読む練習が効果的です。</p>
-      <p style="margin-bottom:10px"><strong>フェーズ別学習計画</strong></p>
-      <p style="margin-bottom:4px">〜4月前半：第3章（経済）を完成</p>
-      <p style="margin-bottom:4px">4月後半〜5月：第2章（財務）を攻略</p>
-      <p style="margin-bottom:4px">5月：第1章（証券分析）★★★を固める</p>
-      <p style="margin-bottom:16px">5月後半〜6月：倫理＋全科目弱点補強</p>
-      <p style="color:var(--text2);font-size:12px">v2.0 — 問題数: 60問収録（随時更新予定）</p>
+  <!-- INFO -->
+  <div class="pane" id="pane-info">
+    <div class="qcard">
+      <div style="font-size:16px;font-weight:600;margin-bottom:14px">使い方 &amp; 学習ガイド</div>
+      <div style="font-size:13px;line-height:1.9;color:var(--text)">
+        <p style="margin-bottom:12px"><strong>毎日の推奨ルーティン（約35分）</strong></p>
+        <p>① ★★★フィルターで10問 → 基礎確認（10分）</p>
+        <p>② その日学んだ単元を絞って10問 → 理解確認（15分）</p>
+        <p style="margin-bottom:16px">③ 計算問題フィルターで5問 → 計算力維持（10分）</p>
+        <p style="margin-bottom:8px"><strong>重要度の見方</strong></p>
+        <p>★★★ 毎年出題・計算必須 → 最優先で完全習得</p>
+        <p>★★  頻出・2年に1回 → しっかり理解</p>
+        <p style="margin-bottom:16px">★   標準 → 余裕があれば押さえる</p>
+        <p style="margin-bottom:8px"><strong>記述式試験への対応</strong></p>
+        <p style="margin-bottom:16px">解説を読んで「なぜそうなるか」を声に出して説明できるか確認してください。答えが合っていても理由を書けなければ二次試験では得点になりません。</p>
+        <p style="margin-bottom:8px"><strong>6月合格ロードマップ</strong></p>
+        <p>〜4月前半：第3章（経済）を完成</p>
+        <p>4月後半〜5月：第2章（財務）を攻略</p>
+        <p>5月：第1章（証券分析）★★★を固める</p>
+        <p style="margin-bottom:16px">5月後半〜6月：倫理＋全科目弱点補強</p>
+        <p style="color:var(--text3);font-size:12px">v5.0 — 問題数: 72問収録</p>
+      </div>
     </div>
   </div>
 </div>
-
-</div><!-- /main -->
 
 <script>
 const QDB = [
@@ -448,201 +461,397 @@ const QDB = [
  q:"GIPSコンポジット（Composite）の定義として正しいものはどれか。",
  ch:["特定顧客の全資産を一つにまとめたもの","同一の投資目的・戦略・制約を持つポートフォリオを集めたグループ","GIPS準拠ファームの全運用資産","ベンチマーク指数の構成銘柄一覧"],a:1,
  e:"GIPSコンポジット：同一戦略・投資目的のポートフォリオ集合体。パフォーマンス報告はコンポジット単位で行い、実績の恣意的な選択・省略を防止する。「良かった期間だけ報告する」といった意図的な歪みを排除するための仕組み。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】D₁=150円、r=9%、g=4%のとき、ゴードン成長モデルによる理論株価はいくらか。",
+ ch:["1,500円","3,000円","3,750円","6,000円"],a:1,
+ e:"P₀=D₁/(r−g)=150/(0.09−0.04)=150/0.05=3,000円。分母r−g=5%に注意。gが上昇（例:5%→6%）すると分母が縮小し株価は大幅に上昇する感応度の高さを理解しておく。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】ROE=15%、配当性向=40%のとき、サステナブル成長率gはいくらか。",
+ ch:["6%","9%","15%","40%"],a:1,
+ e:"g=ROE×内部留保率(b)=ROE×(1−配当性向)=15%×(1−0.4)=15%×0.6=9%。内部留保が多い（配当性向が低い）ほど成長率が高くなる。この9%をDDMのgとして使う。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】Rf=1%、β=0.8、市場リスクプレミアム=7%のとき、CAPMによる期待収益率はいくらか。",
+ ch:["5.6%","6.6%","6.8%","7.6%"],a:1,
+ e:"E(R)=Rf+β×(Rm−Rf)=1%+0.8×7%=1%+5.6%=6.6%。β<1なので市場リターン（1%+7%=8%）より低いリターンが期待される。ディフェンシブ株の特性。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"concept",
+ q:"残余利益モデル（RIM）においてROE=資本コストrのとき、理論株価はどうなるか。",
+ ch:["株価はゼロになる","株価=BPS（PBR=1倍）","株価=EPS/r（PERのみで決まる）","株価は無限大になる"],a:1,
+ e:"RI=(ROE−r)×BPS。ROE=rのとき RI=0。将来の残余利益の現在価値がすべてゼロなので、理論株価P₀=BPS₀（現在の簿価純資産のみ）となり、PBR=1倍。ROE>rなら株価プレミアム、ROE<rならディスカウント。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:2,t:"concept",
+ q:"DCF法でFCFFをWACCで割り引くと何の価値が得られるか。株主価値を求めるにはどうすればよいか。",
+ ch:["株主価値が直接得られる。調整不要","企業価値（EV）が得られる。株主価値=EV−ネット有利子負債","負債価値が得られる。株主価値=EV+負債","資産価値が得られる。株主価値=資産−負債"],a:1,
+ e:"FCFF（企業FCF）÷WACC→企業価値EV（株主＋債権者の価値）。株主価値=EV−ネット有利子負債（有利子負債−現金等）。FCFEをReで割り引けば直接株主価値が得られる。どちらの方法でも答えは一致するはず。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:2,t:"calc",
+ q:"【計算】PBR=2.0倍、ROE=12%のとき、PERはいくらか。",
+ ch:["約8.3倍","約16.7倍","約24倍","約6倍"],a:1,
+ e:"PBR=ROE×PER → PER=PBR/ROE=2.0/0.12≒16.7倍。この関係式は財務分析と株式評価の橋渡し。ROEが高い企業ほど同じPBRでもPERが低く見える（収益力の高さが反映）。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:2,t:"concept",
+ q:"効率的市場仮説の弱形式が成立する場合、有効でなくなる投資戦略はどれか。",
+ ch:["ファンダメンタル分析（財務諸表の詳細分析）","テクニカル分析（過去の価格パターン分析）","インサイダー情報を活用した取引","将来の業績予測に基づく取引"],a:1,
+ e:"弱形式：過去の価格・取引量情報がすべて織り込み済み→テクニカル分析では超過リターン不可。ファンダメンタル分析は準強形まで有効。インサイダー情報は強形でのみ無効（かつ違法）。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:2,t:"concept",
+ q:"証券市場線（SML）と資本市場線（CML）の違いについて正しいものはどれか。",
+ ch:["SMLは横軸が全リスク（σ）、CMLは横軸がβ","SMLは横軸がβですべての資産に適用、CMLは横軸がσで効率的ポートフォリオのみ対象","CMLはアクティブ戦略の評価に使い、SMLはパッシブ戦略に使う","両者は全く同じものを異なる名称で呼ぶ"],a:1,
+ e:"SML（証券市場線）：横軸=β、縦軸=期待収益率。個別株・すべてのポートフォリオが対象。SML上＝適正評価、上方=割安(α>0)、下方=割高(α<0)。CML（資本市場線）：横軸=σ（全リスク）、無リスク資産と接点（市場）ポートフォリオの組み合わせのみ。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:3,t:"concept",
+ q:"2資産ポートフォリオにおいて、相関係数ρ=−1のとき何が可能か。",
+ ch:["分散効果がゼロになりリスクが最大になる","ウェイトを適切に調整することでリスクをゼロにできる（完全ヘッジ）","期待収益率がゼロになる","ポートフォリオのβが1になる"],a:1,
+ e:"ρ=−1（完全負の相関）のとき：σ²p=w₁²σ₁²+w₂²σ₂²−2w₁w₂σ₁σ₂=(w₁σ₁−w₂σ₂)²。適切なw₁・w₂の組み合わせ（w₁σ₁=w₂σ₂）でσp=0。現実にはρ=−1は稀だが、ヘッジ取引の理論的根拠。"},
+{u:"1-1 株式評価",c:"証券分析・PM",i:1,t:"concept",
+ q:"アクティブ運用における情報比（IR）が0.5のとき、その運用の評価として正しいものはどれか。",
+ ch:["非常に低く即座に運用者を交代すべき","優秀な水準。トラッキングエラー1%あたり0.5%のアルファを生んでいる","シャープレシオが0.5と同じ意味である","ベンチマークを50%の確率で上回ることを意味する"],a:1,
+ e:"IR=α/TE=0.5は優秀な水準（一般にIR>0.5で優秀、IR>1.0で非常に優秀）。シャープレシオとは別物（シャープ=超過収益/全リスク、IR=アクティブ収益/アクティブリスク）。0.5超えが継続できるアクティブマネジャーは実際には少ない。"},
+{u:"1-3 債券分析",c:"証券分析・PM",i:3,t:"concept",
+ q:"債券価格と利回りの関係として正しいものはどれか。その理由も含めて答えよ。",
+ ch:["利回り上昇→価格上昇（同方向）","利回り上昇→価格下落（逆方向）","利回りと価格は無関係","利回り上昇→価格上昇（短期債のみ）"],a:1,
+ e:"利回り↑→割引率↑→将来キャッシュフローの現在価値↓→債券価格↓。この逆相関は債券の基本原則。記述では「割引率の上昇により将来の利払いと元本の現在価値が低下するため」と説明する。"},
+{u:"1-3 債券分析",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】修正デュレーション=6、利回りが0.8%上昇した場合、債券価格の変化率は約いくらか。",
+ ch:["−3.0%","−4.8%","+4.8%","−6.0%"],a:1,
+ e:"ΔP/P≒−D*×Δy=−6×0.008=−0.048=−4.8%。マイナス符号が重要（利回り↑→価格↓）。デュレーションが大きいほど金利感応度が高い。長期債・低クーポン債ほどデュレーションが大きい。"},
+{u:"1-3 債券分析",c:"証券分析・PM",i:3,t:"concept",
+ q:"デュレーションを大きくする要因として正しい組み合わせはどれか。",
+ ch:["残存年数↑、クーポン率↑、利回り↑","残存年数↑、クーポン率↓、利回り↓","残存年数↓、クーポン率↑、利回り↓","残存年数↓、クーポン率↓、利回り↑"],a:1,
+ e:"デュレーション↑の3条件：①残存年数↑（後払いが増える）②クーポン率↓（元本に価値が集中し後ろ倒し）③利回り↓（遠い将来の割引が相対的に軽くなる）。ゼロクーポン債のデュレーション=残存年数が最大。"},
+{u:"1-3 債券分析",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】コンベクシティ補正を含む価格変化：D*=5、コンベクシティC=30、利回りΔy=+2%のとき、価格変化率は約いくらか。",
+ ch:["−10.0%","−9.4%","−10.6%","−8.8%"],a:1,
+ e:"ΔP/P≒−D*×Δy+½×C×(Δy)²=−5×0.02+½×30×(0.02)²=−0.10+0.006=−0.094=−9.4%。コンベクシティ項（+0.6%）がデュレーション予測（−10%）を補正し、実際の下落は小さくなる（正のコンベクシティの効果）。"},
+{u:"1-3 債券分析",c:"証券分析・PM",i:3,t:"concept",
+ q:"イールドカーブの逆イールド（長期金利<短期金利）が示す期待理論上の解釈として正しいものはどれか。",
+ ch:["将来の短期金利は現在より上昇する期待","将来の短期金利は現在より低下する期待（景気後退・利下げ期待）","長期債の需要が一時的に減少している","中央銀行が長期金利を人為的に引き下げている"],a:1,
+ e:"期待理論：長期金利=将来の短期金利期待値の平均。逆イールド→将来の短期金利低下期待＝中央銀行の利下げ期待＝景気後退懸念。歴史的に逆イールドは景気後退の先行指標として機能してきた。"},
+{u:"1-3 債券分析",c:"証券分析・PM",i:2,t:"concept",
+ q:"デュレーション免疫戦略（イミュニゼーション）の条件と必要な対応として正しいものはどれか。",
+ ch:["資産利回り=負債利回りに保つ。利回り変化があれば随時調整","資産デュレーション=負債デュレーションに保つ。時間経過とともにDが変化するため定期的なリバランスが必要","資産の時価総額=負債の時価総額に保つ。市場価格変化があれば随時売買","資産のコンベクシティ=負債のコンベクシティに保つ。凸性の変化を管理"],a:1,
+ e:"イミュニゼーション：資産D=負債Dにすることで金利変動による資産・負債価値変化を相殺。デュレーションは時間経過・金利変化で変わるため定期的なリバランスが必要。年金基金・保険会社のALMで使用。"},
+{u:"1-3 債券分析",c:"証券分析・PM",i:2,t:"concept",
+ q:"バーベル戦略とブレット（バレット）戦略の比較として正しいものはどれか。",
+ ch:["バーベルは中期に集中、ブレットは短期・長期に集中","バーベルは短期・長期に集中でコンベクシティが高い。ブレットは特定中期に集中","バーベルもブレットも同じコンベクシティを持つ","ブレットの方がコンベクシティが高く常に有利"],a:1,
+ e:"バーベル：短期+長期に集中→コンベクシティが高い→金利変動耐性◎。ブレット：特定中期に集中→コンベクシティ低い。バーベルはイールドカーブのフラット化局面で有利、ブレットはスティープ化局面で有利になる傾向。"},
+{u:"1-3 債券分析",c:"証券分析・PM",i:2,t:"calc",
+ q:"【計算】2資産債券ポートフォリオ：債券A（ウェイト60%・D*=3）、債券B（ウェイト40%・D*=8）のポートフォリオデュレーションはいくらか。",
+ ch:["4.2","5.0","5.8","11.0"],a:2,
+ e:"ポートフォリオD=Σw_i×D_i=0.6×3+0.4×8=1.8+3.2=5.0。デュレーションの加法性が成立する。利回り1%上昇でポートフォリオは約5%下落する感応度を持つ。"},
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】S=2,000円、r=3%、配当利回りq=1%、T=1年の株価指数先物理論価格はいくらか。",
+ ch:["1,980円","2,020円","2,040円","2,060円"],a:1,
+ e:"F=S×(1+r−q)^T=2,000×(1+0.03−0.01)^1=2,000×1.02=2,040円。配当利回りはキャリーコストを減少させる効果がある。r>qなら先物>現物（コンタンゴ）。"},
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:3,t:"calc",
+ q:"【計算】PCパリティ：S=100円、K=100円、r=2%、T=1年、プット価格P=5円のとき、コール価格はいくらか。",
+ ch:["3.04円","5.00円","6.96円","7.00円"],a:2,
+ e:"PCパリティ：C=P+S−PV(K)=5+100−100/1.02=5+100−98.04=6.96円。PV(K)=100/1.02≒98.04。ATMでC>Pになるのは金利効果でPV(K)<Sとなるため。"},
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:3,t:"concept",
+ q:"オプション価格の決定要因のうち、コール価格とプット価格の両方をプラスに動かす変数はどれか。",
+ ch:["原資産価格の上昇","行使価格の上昇","残存期間の延長とボラティリティの上昇","金利の上昇"],a:2,
+ e:"残存期間↑とボラティリティ↑は、コール・プット両方の時間的価値を増加させる。「チャンスが増える＝どちらの方向でも有利になる可能性が上がる」から。他の変数（S・K・r・配当）はコールとプットで逆方向になる。"},
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:3,t:"concept",
+ q:"コールオプションのデルタ（Δ）=0.7のとき、デルタヘッジのために必要な行動はどれか。",
+ ch:["コール1枚につき原資産を0.7単位買う","コール1枚につき原資産を0.7単位売る（ショート）","コール1枚につきプット0.7枚を買う","何もしない（デルタが自動的に調整される）"],a:1,
+ e:"デルタヘッジ：コールロングのデルタ=+0.7を中和するために原資産0.7単位をショート。原資産が1円上昇するとコール価値+0.7円、原資産ショートで−0.7円→ネットゼロ。株価が動くたびに再調整が必要（動的ヘッジ）。"},
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:2,t:"concept",
+ q:"カバードコール戦略（原資産ロング＋コールショート）の損益特性として正しいものはどれか。",
+ ch:["上昇益は無制限、下落損失はプレミアム分だけ軽減","上昇益に上限（行使価格＋プレミアム）、下落リスクはプレミアム分だけ軽減","上昇益も下落損失も両方限定される","下落リスクは完全にヘッジされる"],a:1,
+ e:"カバードコール：プレミアム収入を得る代わりに、株価が行使価格を超えた上昇益を放棄。下落リスクはプレミアム分だけ軽減されるが完全ヘッジにはならない。保有株からの追加収益獲得戦略として実務でよく使われる。"},
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:2,t:"concept",
+ q:"ストラドル買い（コールBuy＋プットBuy、同一行使価格・満期）戦略が利益を生む条件として正しいものはどれか。",
+ ch:["原資産価格が行使価格に近い水準で安定して推移する","原資産価格が行使価格から大きく乖離する（上下どちらでも）","原資産価格が緩やかに上昇する","原資産のボラティリティが低下する"],a:1,
+ e:"ストラドル買い：コール＋プットの両方のプレミアムを払う。利益を得るには原資産が大きく動いて（上か下か問わない）、支払プレミアム合計を超える損益を得る必要がある。決算・重要発表前などボラティリティ上昇が期待される局面で使われる。"},
+{u:"1-4 デリバティブ",c:"証券分析・PM",i:2,t:"concept",
+ q:"金利スワップで「固定払い・変動受取」ポジションを取る企業にとって有利な状況はどれか。",
+ ch:["金利が低下する局面（変動受取が減少するため）","金利が上昇する局面（変動受取が増加し、固定払いは一定のため）","金利が変動しない局面（スワップコストが発生しないため）","信用スプレッドが拡大する局面"],a:1,
+ e:"固定払い・変動受取：金利↑→変動受取が増加する一方で固定払いは変わらない→差益が拡大→有利。変動金利借入を将来の金利上昇からヘッジするために使われる（固定払いスワップで実質固定金利調達に変換）。"}
 ];
 
-// ═══════════════════════════════════════════════
-// App State
-// ═══════════════════════════════════════════════
-let session=[],cur=0,answered=false;
-let sStats={total:0,correct:0};
-let history=[],unitPerf={};
+// ── State ────────────────────────────────────────────
+let session=[], cur=0, answered=false;
+let sst={total:0,correct:0};
+let history=[], unitPerf={};
 
-// ═══════════════════════════════════════════════
-// Helpers
-// ═══════════════════════════════════════════════
-function stars(i){return i===3?'★★★':i===2?'★★':'★'}
-function bCls(i){return i===3?'b3':i===2?'b2':'b1'}
-function typeLbl(t){return t==='calc'?'計算':'概念・記述'}
-
+// ── Helpers ──────────────────────────────────────────
 function $(id){return document.getElementById(id)}
-function switchTab(t){
-  document.querySelectorAll('.tab').forEach((el,i)=>{
-    const ids=['quiz','hist','stats','info'];
-    el.className='tab'+(ids[i]===t?' active':'');
+function stars(i){return i===3?'★★★':i===2?'★★':'★'}
+function bc(i){return i===3?'b3':i===2?'b2':'b1'}
+function tl(t){return t==='calc'?'計算':'概念・記述'}
+
+function go(tab){
+  document.querySelectorAll('.tab').forEach(el=>el.className='tab');
+  document.querySelectorAll('.pane').forEach(el=>el.className='pane');
+  const tabs=['home','quiz','hist','stats','info'];
+  tabs.forEach((t,i)=>{
+    if(t===tab){
+      document.querySelectorAll('.tab')[i].className='tab on';
+      $('pane-'+t).className='pane on';
+    }
   });
-  ['quiz','hist','stats','info'].forEach(id=>{
-    $('pane-'+id).className='pane'+(id===t?' active':'');
-  });
-  if(t==='hist')renderHist();
-  if(t==='stats')renderStats();
+  if(tab==='home')renderHome();
+  if(tab==='hist')renderHist();
+  if(tab==='stats')renderStats();
 }
 
-// ═══════════════════════════════════════════════
-// Quiz Logic
-// ═══════════════════════════════════════════════
+// ── Quiz ─────────────────────────────────────────────
 function restart(){
-  sStats={total:0,correct:0};
-  buildSession();
+  sst={total:0,correct:0};
+  build();
 }
 
-function buildSession(){
-  const uv=$('fUnit').value,iv=$('fImp').value,tv=$('fType').value;
-  const cnt=parseInt($('fCnt').value);
+function build(){
+  const uv=$('fU').value, iv=$('fI').value, tv=$('fT').value;
+  const cnt=parseInt($('fN').value);
   let pool=QDB.filter(q=>{
     if(uv!=='all'&&!q.u.startsWith(uv))return false;
     if(iv!=='all'&&q.i!==parseInt(iv))return false;
     if(tv!=='all'&&q.t!==tv)return false;
     return true;
-  }).sort(()=>Math.random()-0.5);
+  }).sort(()=>Math.random()-.5);
   session=pool.slice(0,Math.min(cnt,pool.length));
-  cur=0;answered=false;
-  if(session.length===0){
-    $('qcard').innerHTML='<div style="padding:1.2rem;color:var(--text2);font-size:14px;text-align:center">条件に合う問題がありません。<br>フィルターを変更してください。</div>';
+  cur=0; answered=false;
+  if(!session.length){
+    $('qcard').innerHTML='<div style="padding:1rem;color:var(--text2);font-size:14px;text-align:center">条件に合う問題がありません</div>';
     return;
   }
-  updateStats();renderQ();
+  updSt(); showQ();
 }
 
-function updateStats(){
-  const d=sStats.total,ok=sStats.correct;
-  $('st0').textContent=d;
-  $('st1').textContent=ok;
-  $('st2').textContent=d>0?Math.round(ok/d*100)+'%':'-%';
-  $('st3').textContent=Math.max(0,session.length-cur);
-  $('prog').style.width=session.length>0?Math.round(cur/session.length*100)+'%':'0%';
+function updSt(){
+  const d=sst.total,ok=sst.correct;
+  $('s0').textContent=d;
+  $('s1').textContent=ok;
+  $('s2').textContent=d>0?Math.round(ok/d*100)+'%':'-%';
+  $('s3').textContent=Math.max(0,session.length-cur);
+  $('prog').style.width=session.length?Math.round(cur/session.length*100)+'%':'0%';
 }
 
-function renderQ(){
+function showQ(){
   if(cur>=session.length){showResult();return;}
-  const q=session[cur];answered=false;
+  const q=session[cur]; answered=false;
   const L=['A','B','C','D'];
-  const choicesHtml=q.ch.map((c,i)=>`
-    <button class="choice" onclick="answer(${i})">
-      <span class="cletter">${L[i]}</span>
-      <span class="ctext">${c}</span>
-    </button>`).join('');
+  const ch=q.ch.map((c,i)=>`<button class="choice" onclick="ans(${i})"><span class="cl">${L[i]}</span><span class="ct">${c}</span></button>`).join('');
   $('qcard').innerHTML=`
     <div class="qmeta">
-      <span class="badge ${bCls(q.i)}">${stars(q.i)}</span>
+      <span class="badge ${bc(q.i)}">${stars(q.i)}</span>
       <span class="bunit">${q.u}</span>
-      <span class="btype">${typeLbl(q.t)}</span>
+      <span class="btype">${tl(q.t)}</span>
       <span class="qnum">${cur+1} / ${session.length}</span>
     </div>
     <div class="qtext">${q.q}</div>
-    <div class="choices" id="choices">${choicesHtml}</div>
-    <div class="exp" id="exp">
-      <div class="exp-lbl">解説</div>
-      <div class="exp-txt" id="etxt"></div>
-    </div>
-    <div class="actions" id="acts"></div>`;
-  updateStats();
+    <div class="choices">${ch}</div>
+    <div class="exp" id="exp"><div class="exp-lbl">解説</div><div class="exp-txt" id="etxt"></div></div>
+    <div class="acts" id="acts"></div>`;
+  updSt();
 }
 
-function answer(idx){
-  if(answered)return;answered=true;
+function ans(idx){
+  if(answered)return; answered=true;
   const q=session[cur];
   const btns=document.querySelectorAll('.choice');
   btns.forEach(b=>b.disabled=true);
   const ok=idx===q.a;
-  sStats.total++;if(ok)sStats.correct++;
-  btns[idx].classList.add(ok?'correct':'wrong');
-  if(!ok)btns[q.a].classList.add('reveal');
+  sst.total++; if(ok)sst.correct++;
+  btns[idx].classList.add(ok?'ok':'ng');
+  if(!ok)btns[q.a].classList.add('rv');
   $('etxt').textContent=q.e;
   $('exp').style.display='block';
   history.unshift({q:q.q,u:q.u,ok,i:q.i,t:q.t});
   if(!unitPerf[q.u])unitPerf[q.u]={total:0,correct:0,i:q.i};
-  unitPerf[q.u].total++;if(ok)unitPerf[q.u].correct++;
+  unitPerf[q.u].total++; if(ok)unitPerf[q.u].correct++;
   const nb=document.createElement('button');
-  nb.className='btn btn-p';
-  nb.style.cssText='flex:1;min-width:140px';
+  nb.className='btn btn-p'; nb.style.flex='1';
   nb.textContent=cur+1<session.length?'次の問題 →':'結果を見る →';
-  nb.onclick=()=>{cur++;renderQ();};
+  nb.onclick=()=>{cur++;showQ();};
   $('acts').appendChild(nb);
-  updateStats();
+  updSt();
 }
 
 function showResult(){
-  const pct=session.length>0?Math.round(sStats.correct/session.length*100):0;
-  const msg=pct>=80?'合格圏内！この調子を維持しましょう':pct>=60?'あと一歩！頻出論点を重点復習':pct>=40?'基礎をしっかり固めましょう':'★★★論点から集中的に取り組みを';
-  const col=pct>=80?'var(--greenborder)':pct>=60?'var(--s2)':'var(--s3)';
+  const pct=session.length?Math.round(sst.correct/session.length*100):0;
+  const msg=pct>=80?'合格圏内！この調子を維持':pct>=60?'あと一歩！頻出論点を復習':pct>=40?'基礎を固めましょう':'★★★論点から集中的に';
+  const col=pct>=80?'var(--greenbd)':pct>=60?'var(--s2)':'var(--s3)';
   $('qcard').innerHTML=`
     <div class="result">
       <div style="font-size:13px;color:var(--text2)">${session.length}問セッション完了</div>
       <div class="rscore" style="color:${col}">${pct}<span>%</span></div>
       <div class="rmsg">${msg}</div>
-      <div class="rbreakdown">
-        <div class="stat"><div class="stat-val" style="color:var(--greenborder)">${sStats.correct}</div><div class="stat-lbl">正解</div></div>
-        <div class="stat"><div class="stat-val" style="color:var(--s3)">${session.length-sStats.correct}</div><div class="stat-lbl">不正解</div></div>
-        <div class="stat"><div class="stat-val">${session.length}</div><div class="stat-lbl">合計</div></div>
+      <div class="rbk">
+        <div class="sc"><div class="sv" style="color:var(--greenbd)">${sst.correct}</div><div class="sl">正解</div></div>
+        <div class="sc"><div class="sv" style="color:var(--s3)">${session.length-sst.correct}</div><div class="sl">不正解</div></div>
+        <div class="sc"><div class="sv">${session.length}</div><div class="sl">合計</div></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
         <button class="btn btn-p" onclick="restart()">もう一度（同条件）</button>
-        <button class="btn" onclick="$('fImp').value='3';restart()">★★★のみ再挑戦</button>
-        <button class="btn" onclick="$('fType').value='calc';restart()">計算問題のみ</button>
-        <button class="btn" onclick="switchTab('stats')">単元別成績を確認する</button>
+        <button class="btn" onclick="$('fI').value='3';restart()">★★★のみ再挑戦</button>
+        <button class="btn" onclick="$('fT').value='calc';restart()">計算問題のみ</button>
+        <button class="btn" onclick="go('stats')">単元別成績を確認</button>
       </div>
     </div>`;
   $('prog').style.width='100%';
 }
 
-// ═══════════════════════════════════════════════
-// History & Stats
-// ═══════════════════════════════════════════════
+// ── History ──────────────────────────────────────────
 function renderHist(){
   const el=$('hist-body');
-  if(history.length===0){
-    el.innerHTML='<div style="color:var(--text2);font-size:14px;padding:8px">まだ回答履歴がありません。<br>問題演習を始めてください。</div>';return;
-  }
+  if(!history.length){el.innerHTML='<div style="color:var(--text2);font-size:14px;padding:8px">まだ回答履歴がありません</div>';return;}
   el.innerHTML='<div style="font-size:13px;font-weight:600;margin-bottom:10px">直近の回答履歴</div>'+
     history.slice(0,40).map(h=>`
-      <div class="hist-row">
-        <div class="dot ${h.ok?'dot-ok':'dot-ng'}"></div>
-        <span class="badge ${bCls(h.i)}" style="flex-shrink:0">${stars(h.i)}</span>
-        <span class="btype" style="flex-shrink:0">${typeLbl(h.t)}</span>
-        <span class="hist-q">${h.q.slice(0,50)}…</span>
+      <div class="hr">
+        <div class="dot ${h.ok?'dok':'dng'}"></div>
+        <span class="badge ${bc(h.i)}" style="flex-shrink:0">${stars(h.i)}</span>
+        <span class="btype" style="flex-shrink:0">${tl(h.t)}</span>
+        <span style="font-size:12px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h.q.slice(0,48)}…</span>
       </div>`).join('');
 }
 
+// ── Stats ─────────────────────────────────────────────
 function renderStats(){
   const el=$('stats-body');
   const entries=Object.entries(unitPerf);
-  if(entries.length===0){
-    el.innerHTML='<div style="color:var(--text2);font-size:14px;padding:8px">まだデータがありません。<br>問題を解くと成績が表示されます。</div>';return;
-  }
+  if(!entries.length){el.innerHTML='<div style="color:var(--text2);font-size:14px;padding:8px">まだデータがありません</div>';return;}
   const tot=entries.reduce((a,[,v])=>a+v.total,0);
   const ok=entries.reduce((a,[,v])=>a+v.correct,0);
-  const pct=tot>0?Math.round(ok/tot*100):0;
-  const pctCol=pct>=80?'var(--greenborder)':pct>=60?'var(--s2)':'var(--s3)';
+  const overall=tot?Math.round(ok/tot*100):0;
+  const oc=overall>=80?'var(--greenbd)':overall>=60?'var(--s2)':'var(--s3)';
   const rows=entries.sort((a,b)=>a[0].localeCompare(b[0])).map(([u,d])=>{
     const p=Math.round(d.correct/d.total*100);
-    const c=p>=80?'var(--greenborder)':p>=60?'var(--s2)':'var(--s3)';
-    return `<div class="unit-row">
-      <span class="badge ${bCls(d.i)}" style="flex-shrink:0">${stars(d.i)}</span>
+    const c=p>=80?'var(--greenbd)':p>=60?'var(--s2)':'var(--s3)';
+    return `<div class="ur">
+      <span class="badge ${bc(d.i)}" style="flex-shrink:0">${stars(d.i)}</span>
       <span style="font-size:12px;flex:1">${u}</span>
       <span style="font-size:11px;color:var(--text2)">${d.correct}/${d.total}</span>
-      <div class="ubar-wrap"><div class="ubar" style="width:${p}%;background:${c}"></div></div>
-      <span class="unit-pct" style="color:${c}">${p}%</span>
+      <div class="ubw"><div class="ub" style="width:${p}%;background:${c}"></div></div>
+      <span style="font-size:13px;font-weight:700;color:${c};min-width:36px;text-align:right">${p}%</span>
     </div>`;
   }).join('');
   el.innerHTML=`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
       <span style="font-size:14px;font-weight:600">単元別正解率</span>
-      <span style="font-size:13px;font-weight:700;color:${pctCol}">${ok}/${tot}問 ${pct}%</span>
+      <span style="font-size:13px;font-weight:700;color:${oc}">${ok}/${tot}問 ${overall}%</span>
     </div>${rows}`;
 }
 
-// ═══════════════════════════════════════════════
-// Init
-// ═══════════════════════════════════════════════
+// ── Home Dashboard ────────────────────────────────────
+function renderHome(){
+  const el=$('home-body');
+  const entries=Object.entries(unitPerf);
+  const tot=entries.reduce((a,[,v])=>a+v.total,0);
+  const ok=entries.reduce((a,[,v])=>a+v.correct,0);
+  const rate=tot?Math.round(ok/tot*100):0;
+  const rc=rate>=80?'var(--greenbd)':rate>=60?'var(--s2)':'var(--s3)';
+
+  const exam=new Date('2026-06-07');
+  const now=new Date();
+  const daysLeft=Math.max(0,Math.round((exam-now)/(1000*60*60*24)));
+  const elapsed=Math.max(0,84-daysLeft);
+  const phase=elapsed<28?1:elapsed<56?2:elapsed<77?3:4;
+  const phLbl=['Ph1 経済','Ph2 財務','Ph3 証券分析','Ph4 仕上げ'];
+  const phCol=['#C0392B','#C9943C','#065A82','#1A6640'];
+
+  const allUnits=['1-1 株式評価','1-2 パフォーマンス評価','1-3 債券分析','1-4 デリバティブ',
+    '1-5 資産配分','1-6 国際証券投資','1-7 オルタナティブ','1-8 行動ファイナンス',
+    '2-1 コーポレートF','2-2 会計制度','2-3 財務諸表分析',
+    '3-1 マクロ経済学','3-2 国際金融','3-3 ミクロ経済学','4-1 職業倫理'];
+
+  const uData=allUnits.map(u=>{
+    const key=Object.keys(unitPerf).find(k=>k===u||u.startsWith(k.split(' ')[0]));
+    const d=key?unitPerf[key]:null;
+    return {u, pct:d?Math.round(d.correct/d.total*100):-1, tot:d?d.total:0};
+  }).sort((a,b)=>a.pct-b.pct);
+
+  const weak=uData.filter(d=>d.pct>=0&&d.pct<60).slice(0,4);
+  const untouched=uData.filter(d=>d.pct<0).slice(0,3);
+
+  let advice='';
+  if(!tot)advice='まず★★★フィルターで問題を解いてみましょう。自分の正解率を把握することが最初のステップです。';
+  else if(rate<50)advice='★★★の問題だけに絞って10問ずつ解き、解説を丁寧に読む習慣をつけましょう。';
+  else if(weak.length)advice=`苦手単元「${weak[0].u}」の集中演習をおすすめします。フィルターでその単元を選び取り組みましょう。`;
+  else if(untouched.length)advice=`まだ演習していない単元「${untouched[0].u}」があります。網羅的に進めましょう。`;
+  else advice='全単元に取り組んでいます！正解率80%以上を目指して、苦手な計算問題を重点的に復習しましょう。';
+
+  const radius=36, circ=2*Math.PI*radius;
+  const offset=rate>0?circ*(1-rate/100):circ;
+  const ringC=rate>=80?'#1D9E75':rate>=60?'#C9943C':'#C0392B';
+
+  el.innerHTML=`
+<div style="padding-bottom:8px">
+  <div style="font-size:17px;font-weight:500;margin-bottom:14px">こんにちは！<span style="color:var(--acc)">6月の合格</span>に向けて今日も進めましょう 💪</div>
+
+  <div class="sec-title">残り日数・正解率</div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kv" style="color:var(--s3)">${daysLeft}</div>
+      <div class="kl">試験まで（日）</div>
+      <div class="ks">6月7日（予定）</div>
+    </div>
+    <div class="kpi">
+      <div class="kv" style="color:${rc}">${rate?rate+'%':'--'}</div>
+      <div class="kl">総合正解率</div>
+      <div class="ks">${ok}/${tot}問</div>
+    </div>
+  </div>
+
+  <div class="ring-row">
+    <svg width="88" height="88" viewBox="0 0 88 88" style="flex-shrink:0">
+      <circle cx="44" cy="44" r="${radius}" fill="none" stroke="#E2E5EF" stroke-width="8"/>
+      <circle cx="44" cy="44" r="${radius}" fill="none" stroke="${ringC}" stroke-width="8"
+        stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
+        stroke-linecap="round" transform="rotate(-90 44 44)"/>
+      <text x="44" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="${ringC}">${rate}%</text>
+    </svg>
+    <div class="ring-info">
+      <div class="rp" style="color:${rc}">${rate}%</div>
+      <div class="rl">現在の正解率</div>
+      <div class="rs">目標：65%以上で合格圏</div>
+      <div class="rs">解答済み ${tot}問 ／ 全${QDB.length}問</div>
+    </div>
+  </div>
+
+  <div class="sec-title">フェーズ進捗（3ヶ月ロードマップ）</div>
+  <div class="phase-bar">
+    ${phLbl.map((l,i)=>`<div class="ph" style="flex:${i===phase-1?2:1};background:${phCol[i]};opacity:${i<phase?1:0.35}">${l}</div>`).join('')}
+  </div>
+  <div style="font-size:11px;color:var(--text2);margin-bottom:16px">現在 Phase ${phase}：${phLbl[phase-1]} ／ 残り${daysLeft}日</div>
+
+  <div class="sec-title">クイックスタート</div>
+  <div class="qbtns">
+    <button class="qbtn qbtn-p" onclick="$('fI').value='3';go('quiz');restart()">★★★ 10問スタート</button>
+    <button class="qbtn" onclick="$('fT').value='calc';go('quiz');restart()">計算問題だけ</button>
+    <button class="qbtn" onclick="$('fU').value='1-3';go('quiz');restart()">債券分析を解く</button>
+    <button class="qbtn" onclick="$('fU').value='all';$('fI').value='all';go('quiz');restart()">ランダム10問</button>
+  </div>
+
+  ${weak.length?`
+  <div class="sec-title">⚠️ 苦手単元（正解率60%未満）</div>
+  <div class="wi-list">
+    ${weak.map(d=>{const c=d.pct<40?'var(--s3)':'var(--s2)';return`<div class="wi">
+      <div class="wi-u">${d.u}</div>
+      <div class="wi-bw"><div class="wi-b" style="width:${d.pct}%;background:${c}"></div></div>
+      <div class="wi-p" style="color:${c}">${d.pct}%</div>
+    </div>`;}).join('')}
+  </div>`:''}
+
+  ${untouched.length?`
+  <div class="sec-title">📋 未演習単元</div>
+  <div class="wi-list">
+    ${untouched.map(d=>`<div class="wi"><div class="wi-u">${d.u}</div><span style="font-size:11px;color:var(--text3);margin-left:auto">未演習</span></div>`).join('')}
+  </div>`:''}
+
+  <div class="sec-title">今日のアドバイス</div>
+  <div class="adv">
+    <div class="adv-lbl">今日のポイント</div>
+    <div class="adv-txt">${advice}</div>
+  </div>
+</div>`;
+}
+
+// ── Init ─────────────────────────────────────────────
 function init(){
-  const sel=$('fUnit');
-  const units=[...new Set(QDB.map(q=>q.u))].sort();
-  units.forEach(u=>{
+  const sel=$('fU');
+  [...new Set(QDB.map(q=>q.u))].sort().forEach(u=>{
     const o=document.createElement('option');
-    o.value=u.split(' ')[0];o.textContent=u;
+    o.value=u.split(' ')[0]; o.textContent=u;
     sel.appendChild(o);
   });
-  buildSession();
+  build();
+  renderHome();
 }
 init();
 </script>
