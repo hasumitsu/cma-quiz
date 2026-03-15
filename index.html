@@ -8,20 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="CMA演習">
 <title>証券アナリスト 2次試験 問題演習</title>
 <style>
-:root{
-  --nv:#0D1B3E;--nvm:#1A3160;--nvl:#243D6E;
-  --gd:#C9943C;--gdl:#F0C96A;
-  --s3:#C0392B;--s3b:#FADBD8;--s3d:#791F1F;
-  --s2:#C9943C;--s2b:#FEF9E7;--s2d:#633806;
-  --s1:#6B7A99;--s1b:#EEF0F5;--s1d:#444441;
-  --gn:#085041;--gnb:#E1F5EE;--gnbd:#1D9E75;
-  --rb:#FCEBEB;--rbd:#A32D2D;
-  --bg:#F8F9FB;--cd:#FFFFFF;
-  --tx:#1A1A2E;--t2:#6B7A99;--t3:#9BA3B8;
-  --br:#E2E5EF;--br2:#CBD0E0;
-  --r:12px;--rs:8px;
-  --ac:#065A82;--acm:#378ADD;
-}
+:root{--nv:#0D1B3E;--nvm:#1A3160;--gd:#C9943C;--gdl:#F0C96A;--s3:#C0392B;--s3b:#FADBD8;--s3d:#791F1F;--s2:#C9943C;--s2b:#FEF9E7;--s2d:#633806;--s1:#6B7A99;--s1b:#EEF0F5;--s1d:#444441;--gn:#085041;--gnb:#E1F5EE;--gnbd:#1D9E75;--rb:#FCEBEB;--rbd:#A32D2D;--bg:#F8F9FB;--cd:#FFFFFF;--tx:#1A1A2E;--t2:#6B7A99;--t3:#9BA3B8;--br:#E2E5EF;--br2:#CBD0E0;--r:12px;--rs:8px;--ac:#065A82;--acm:#378ADD}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
 .hdr{background:var(--nv);position:sticky;top:0;z-index:100;padding-top:env(safe-area-inset-top)}
@@ -29,7 +16,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sa
 .hdr h1{font-size:17px;font-weight:600;color:#fff;flex:1}
 .hbg{background:var(--gd);color:var(--nv);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
 .tabs{display:flex;background:var(--nvm)}
-.tab{flex:1;padding:10px 0;font-size:12px;color:rgba(255,255,255,.55);text-align:center;cursor:pointer;border-bottom:2px solid transparent;border:none;background:none;font-family:inherit}
+.tab{flex:1;padding:10px 0;font-size:12px;color:rgba(255,255,255,.55);text-align:center;cursor:pointer;border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;background:none;font-family:inherit}
 .tab.on{color:#fff;border-bottom:2px solid var(--gd)}
 .main{padding:16px;padding-bottom:calc(20px + env(safe-area-inset-bottom));max-width:600px;margin:0 auto}
 .pane{display:none}.pane.on{display:block}
@@ -45,7 +32,7 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
 .bg{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600}
 .b3{background:var(--s3b);color:var(--s3d)}.b2{background:var(--s2b);color:var(--s2d)}.b1{background:var(--s1b);color:var(--s1d)}
 .bu{background:#EEF0F5;color:var(--nvm);font-size:11px;padding:3px 9px;border-radius:20px}
-.bt{background:#F0F4FF;color:var(--nvl);font-size:10px;padding:2px 7px;border-radius:20px}
+.bt{background:#F0F4FF;color:#243D6E;font-size:10px;padding:2px 7px;border-radius:20px}
 .qn{font-size:12px;color:var(--t2);margin-left:auto}
 .qt{font-size:15px;font-weight:500;line-height:1.7;color:var(--tx);margin-bottom:14px}
 .cs{display:flex;flex-direction:column;gap:8px}
@@ -63,7 +50,7 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
 .ep{margin-top:12px;padding:12px 14px;background:#F0F6FF;border-radius:var(--rs);border-left:3px solid var(--acm);display:none}
 .el{font-size:11px;font-weight:600;color:var(--ac);margin-bottom:5px}
 .et{font-size:13px;color:var(--tx);line-height:1.7}
-.ac{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.act{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .btn{padding:10px 18px;border:1.5px solid var(--br2);border-radius:var(--rs);background:var(--cd);color:var(--tx);font-size:14px;cursor:pointer;font-weight:500;font-family:inherit;-webkit-appearance:none}
 .btn:active{opacity:.8}
 .bp{background:var(--nv);border-color:var(--nv);color:#fff}
@@ -78,13 +65,12 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
 .ur{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--br)}
 .ubw{width:72px;height:6px;background:var(--br);border-radius:3px;overflow:hidden;flex-shrink:0}
 .ub{height:100%;border-radius:3px}
-/* Dashboard */
 .st{font-size:12px;font-weight:600;color:var(--t2);letter-spacing:.05em;text-transform:uppercase;margin:18px 0 10px}
 .kg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
 .ki{background:var(--cd);border:1px solid var(--br);border-radius:var(--r);padding:14px 16px}
 .kv{font-size:28px;font-weight:700}.kl{font-size:12px;color:var(--t2)}.ks{font-size:11px;color:var(--t3);margin-top:2px}
 .rr{display:flex;align-items:center;gap:14px;background:var(--cd);border:1px solid var(--br);border-radius:var(--r);padding:14px 16px;margin-bottom:6px}
-.ph-bar{display:flex;border-radius:var(--rs);overflow:hidden;height:30px;margin-bottom:6px}
+.phb{display:flex;border-radius:var(--rs);overflow:hidden;height:30px;margin-bottom:6px}
 .ph{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff}
 .qbg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
 .qb{padding:12px;border:1px solid var(--br);border-radius:var(--rs);background:var(--cd);color:var(--tx);font-size:13px;font-weight:500;cursor:pointer;text-align:center;-webkit-appearance:none;font-family:inherit}
@@ -95,8 +81,8 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
 .wbw{width:80px;height:6px;background:var(--br);border-radius:3px;overflow:hidden;flex-shrink:0}
 .wb{height:100%;border-radius:3px}.wp{font-size:13px;font-weight:700;min-width:36px;text-align:right;flex-shrink:0}
 .adv{background:var(--cd);border:1px solid var(--br);border-radius:var(--rs);padding:14px;border-left:3px solid var(--acm)}
-.al{font-size:11px;color:var(--acm);font-weight:600;margin-bottom:5px}
-.at{font-size:13px;line-height:1.7}
+.advl{font-size:11px;color:var(--acm);font-weight:600;margin-bottom:5px}
+.advt{font-size:13px;line-height:1.7}
 </style>
 </head>
 <body>
@@ -115,9 +101,23 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
   <div class="pane" id="pane-quiz">
     <div class="flt">
       <select id="fU" onchange="restart()"><option value="all">全単元</option></select>
-      <select id="fI" onchange="restart()"><option value="all">全重要度</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select>
-      <select id="fT" onchange="restart()"><option value="all">全タイプ</option><option value="concept">概念・記述</option><option value="calc">計算問題</option></select>
-      <select id="fN" onchange="restart()"><option value="5">5問</option><option value="10" selected>10問</option><option value="20">20問</option><option value="999">全問</option></select>
+      <select id="fI" onchange="restart()">
+        <option value="all">全重要度</option>
+        <option value="3">★★★</option>
+        <option value="2">★★</option>
+        <option value="1">★</option>
+      </select>
+      <select id="fT" onchange="restart()">
+        <option value="all">全タイプ</option>
+        <option value="concept">概念・記述</option>
+        <option value="calc">計算問題</option>
+      </select>
+      <select id="fN" onchange="restart()">
+        <option value="5">5問</option>
+        <option value="10" selected>10問</option>
+        <option value="20">20問</option>
+        <option value="999">全問</option>
+      </select>
     </div>
     <div class="sg">
       <div class="sc"><div class="sv" id="s0">0</div><div class="sl">回答済み</div></div>
@@ -132,12 +132,12 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
   <div class="pane" id="pane-stats"><div class="qc" id="sts" style="min-height:200px"></div></div>
   <div class="pane" id="pane-info">
     <div class="qc">
-      <div style="font-size:16px;font-weight:600;margin-bottom:14px">使い方 &#38; 学習ガイド</div>
+      <p style="font-size:16px;font-weight:600;margin-bottom:14px">使い方 &amp; 学習ガイド</p>
       <div style="font-size:13px;line-height:1.9;color:var(--tx)">
-        <p style="font-weight:600;margin-bottom:8px">毎日の推奨ルーティン（約35分）</p>
-        <p>① ★★★フィルターで10問 → 基礎確認（10分）</p>
-        <p>② その日学んだ単元を絞って10問 → 理解確認（15分）</p>
-        <p style="margin-bottom:14px">③ 計算問題フィルターで5問 → 計算力維持（10分）</p>
+        <p style="font-weight:600;margin-bottom:8px">毎日の推奨ルーティン</p>
+        <p>&#9312; ★★★で10問 → 基礎確認（10分）</p>
+        <p>&#9313; その日の単元を絞って10問 → 理解確認（15分）</p>
+        <p style="margin-bottom:14px">&#9314; 計算問題で5問 → 計算力維持（10分）</p>
         <p style="font-weight:600;margin-bottom:8px">重要度の見方</p>
         <p>★★★ 毎年出題・計算必須 → 最優先</p>
         <p>★★ 頻出・2年に1回 → しっかり理解</p>
@@ -145,9 +145,9 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
         <p style="font-weight:600;margin-bottom:8px">6月合格ロードマップ</p>
         <p>〜4月前半：第3章（経済）完成</p>
         <p>4月後半〜5月：第2章（財務）攻略</p>
-        <p>5月：第1章（証券分析）★★★を固める</p>
-        <p style="margin-bottom:14px">5月後半〜6月：倫理＋全科目弱点補強</p>
-        <p style="color:var(--t3);font-size:12px">v8.0 — 158問収録（全15単元×10問以上）</p>
+        <p>5月：第1章（証券分析）★★★固める</p>
+        <p style="margin-bottom:14px">5月後半〜6月：全科目弱点補強</p>
+        <p style="color:var(--t3);font-size:12px">v9.0 — 158問（全15単元×10問以上）</p>
       </div>
     </div>
   </div>
@@ -745,7 +745,6 @@ const QDB=[
 {u:"3-2 国際金融",c:"市場と経済",i:3,t:"calc",
  q:"【計算】国内金利=1%、米国金利=4%、直物レート=150円/ドルのとき、カバー付き金利平価（CIP）による1年物先物レートはいくらか。",
  ch:["145.67円/ドル","150.00円/ドル","154.35円/ドル","153.00円/ドル"],a:2,
- e:"CIP：F=S×(1+r国内)/(1+r米国)=150×1.01/1.04=150×0.9712≒145.67円/ドル……ではなく、F=S×(1+r円)/(1+r$)=150×1.01/1.04≒145.67。いや正確にはF=150×(1.01/1.04)≒145.67。選択肢の154.35は150×1.04/1.01≒154.46≒154.35。国内金利<外国金利→円高方向（F<S）のはずだが選択肢cは円安……問題を修正：日本金利4%・米国金利1%なら F=150×1.04/1.01≒154.46≒154.35円/ドル。",
  e:"CIP：F=S×(1+r国内)/(1+r外国)=150×1.04/1.01≒154.46円/ドル（≒154.35）。国内金利>外国金利→先物でドル安円高になるべきところを、ここでは日本が高金利のため円安方向の先物レート。フォワードプレミアム=154.35-150=4.35円。"},
 {u:"3-2 国際金融",c:"市場と経済",i:2,t:"concept",
  q:"固定相場制と変動相場制の比較として正しいものはどれか。",
@@ -789,160 +788,271 @@ const QDB=[
  e:"絶対的PPP：同一財の価格が為替調整後に等しくなる（例：ビッグマック指数）。現実には輸送コスト・関税・非貿易財の存在で成立しにくい。相対的PPP：為替変化率≒2国間のインフレ率差（Δe≒π国内-π海外）。長期的な為替水準の理解に使われる。短期予測には向かない。"}
 ];
 
-var session=[],cur=0,answered=false,sst={total:0,correct:0},history=[],uPerf={};
-function $(i){return document.getElementById(i)}
-function st(i){return i===3?'★★★':i===2?'★★':'★'}
-function bc(i){return i===3?'b3':i===2?'b2':'b1'}
-function tl(t){return t==='calc'?'計算':'概念・記述'}
+var _s=[],_c=0,_a=false,_st={n:0,ok:0},_h=[],_up={};
+function D(i){return document.getElementById(i)}
+function _star(i){return i===3?'★★★':i===2?'★★':'★'}
+function _bc(i){return i===3?'b3':i===2?'b2':'b1'}
+function _tl(t){return t==='calc'?'計算':'概念・記述'}
 
 function go(tab){
+  var ids=['home','quiz','hist','stats','info'];
   document.querySelectorAll('.tab').forEach(function(el,i){
-    var ids=['home','quiz','hist','stats','info'];
-    el.className=ids[i]===tab?'tab on':'tab';
+    el.className = ids[i]===tab ? 'tab on' : 'tab';
   });
-  ['home','quiz','hist','stats','info'].forEach(function(id){
-    $('pane-'+id).className=id===tab?'pane on':'pane';
+  ids.forEach(function(id){
+    var p = D('pane-'+id);
+    if(p) p.className = id===tab ? 'pane on' : 'pane';
   });
-  if(tab==='home')renderHome();
-  if(tab==='hist')renderHist();
-  if(tab==='stats')renderStats();
+  if(tab==='home') rHome();
+  if(tab==='hist') rHist();
+  if(tab==='stats') rStats();
 }
 
-function restart(){sst={total:0,correct:0};build();}
+function restart(){_st={n:0,ok:0};build();}
 
 function build(){
-  var uv=$('fU').value,iv=$('fI').value,tv=$('fT').value,cnt=parseInt($('fN').value);
+  var uv=D('fU').value, iv=D('fI').value, tv=D('fT').value;
+  var cnt=parseInt(D('fN').value);
   var pool=QDB.filter(function(q){
-    if(uv!=='all'&&q.u.indexOf(uv)!==0)return false;
-    if(iv!=='all'&&q.i!==parseInt(iv))return false;
-    if(tv!=='all'&&q.t!==tv)return false;
+    if(uv!=='all' && q.u.indexOf(uv)!==0) return false;
+    if(iv!=='all' && q.i!==parseInt(iv)) return false;
+    if(tv!=='all' && q.t!==tv) return false;
     return true;
   }).sort(function(){return Math.random()-.5;});
-  session=pool.slice(0,Math.min(cnt,pool.length));
-  cur=0;answered=false;
-  if(!session.length){
-    $('qcard').innerHTML='<div style="padding:1rem;color:var(--t2);font-size:14px;text-align:center">条件に合う問題がありません</div>';
+  _s = pool.slice(0, Math.min(cnt, pool.length));
+  _c=0; _a=false;
+  if(!_s.length){
+    D('qcard').innerHTML='<div style="padding:1rem;color:var(--t2);font-size:14px;text-align:center">条件に合う問題がありません</div>';
     return;
   }
-  updSt();showQ();
+  updS(); showQ();
 }
 
-function updSt(){
-  var d=sst.total,ok=sst.correct;
-  $('s0').textContent=d;$('s1').textContent=ok;
-  $('s2').textContent=d>0?Math.round(ok/d*100)+'%':'-%';
-  $('s3').textContent=Math.max(0,session.length-cur);
-  $('prog').style.width=session.length?Math.round(cur/session.length*100)+'%':'0%';
+function updS(){
+  D('s0').textContent=_st.n;
+  D('s1').textContent=_st.ok;
+  D('s2').textContent=_st.n>0 ? Math.round(_st.ok/_st.n*100)+'%' : '-%';
+  D('s3').textContent=Math.max(0,_s.length-_c);
+  D('prog').style.width=_s.length ? Math.round(_c/_s.length*100)+'%' : '0%';
 }
 
 function showQ(){
-  if(cur>=session.length){showResult();return;}
-  var q=session[cur];answered=false;
+  if(_c>=_s.length){showR();return;}
+  var q=_s[_c]; _a=false;
   var L=['A','B','C','D'];
-  var ch=q.ch.map(function(c,i){
-    return '<button class="ch" onclick="ans('+i+')">'+'<span class="cl">'+L[i]+'</span><span class="ct">'+c+'</span></button>';
-  }).join('');
-  $('qcard').innerHTML='<div class="qm"><span class="bg '+bc(q.i)+'">'+st(q.i)+'</span><span class="bu">'+q.u+'</span><span class="bt">'+tl(q.t)+'</span><span class="qn">'+(cur+1)+' / '+session.length+'</span></div><div class="qt">'+q.q+'</div><div class="cs">'+ch+'</div><div class="ep" id="ep"><div class="el">解説</div><div class="et" id="et"></div></div><div class="ac" id="ac"></div>';
-  updSt();
+  var ch='';
+  for(var i=0;i<q.ch.length;i++){
+    ch+='<button class="ch" onclick="ans('+i+')"><span class="cl">'+L[i]+'</span><span class="ct">'+q.ch[i]+'</span></button>';
+  }
+  D('qcard').innerHTML=
+    '<div class="qm">'+
+      '<span class="bg '+_bc(q.i)+'">'+_star(q.i)+'</span>'+
+      '<span class="bu">'+q.u+'</span>'+
+      '<span class="bt">'+_tl(q.t)+'</span>'+
+      '<span class="qn">'+(_c+1)+' / '+_s.length+'</span>'+
+    '</div>'+
+    '<div class="qt">'+q.q+'</div>'+
+    '<div class="cs">'+ch+'</div>'+
+    '<div class="ep" id="ep"><div class="el">解説</div><div class="et" id="et"></div></div>'+
+    '<div class="act" id="act"></div>';
+  updS();
 }
 
 function ans(idx){
-  if(answered)return;answered=true;
-  var q=session[cur];
+  if(_a) return; _a=true;
+  var q=_s[_c];
   var btns=document.querySelectorAll('.ch');
-  btns.forEach(function(b){b.disabled=true;});
-  var ok=idx===q.a;
-  sst.total++;if(ok)sst.correct++;
+  for(var i=0;i<btns.length;i++) btns[i].disabled=true;
+  var ok=(idx===q.a);
+  _st.n++; if(ok) _st.ok++;
   btns[idx].classList.add(ok?'ok':'ng');
-  if(!ok)btns[q.a].classList.add('rv');
-  $('et').textContent=q.e;$('ep').style.display='block';
-  history.unshift({q:q.q,u:q.u,ok:ok,i:q.i,t:q.t});
-  if(!uPerf[q.u])uPerf[q.u]={total:0,correct:0,i:q.i};
-  uPerf[q.u].total++;if(ok)uPerf[q.u].correct++;
+  if(!ok) btns[q.a].classList.add('rv');
+  D('et').textContent=q.e;
+  D('ep').style.display='block';
+  _h.unshift({q:q.q,u:q.u,ok:ok,i:q.i,t:q.t});
+  if(!_up[q.u]) _up[q.u]={n:0,ok:0,i:q.i};
+  _up[q.u].n++; if(ok) _up[q.u].ok++;
   var nb=document.createElement('button');
-  nb.className='btn bp';nb.style.flex='1';
-  nb.textContent=cur+1<session.length?'次の問題 →':'結果を見る →';
-  nb.onclick=function(){cur++;showQ();};
-  $('ac').appendChild(nb);updSt();
+  nb.className='btn bp'; nb.style.cssText='flex:1;width:100%';
+  nb.textContent=(_c+1<_s.length)?'次の問題 →':'結果を見る →';
+  nb.onclick=function(){_c++;showQ();};
+  D('act').appendChild(nb);
+  updS();
 }
 
-function showResult(){
-  var pct=session.length?Math.round(sst.correct/session.length*100):0;
+function showR(){
+  var pct=_s.length?Math.round(_st.ok/_s.length*100):0;
   var msg=pct>=80?'合格圏内！この調子を維持':pct>=60?'あと一歩！頻出論点を復習':pct>=40?'基礎を固めましょう':'★★★論点から集中的に';
   var col=pct>=80?'var(--gnbd)':pct>=60?'var(--s2)':'var(--s3)';
-  $('qcard').innerHTML='<div class="rs"><div style="font-size:13px;color:var(--t2)">'+session.length+'問セッション完了</div><div class="rsc" style="color:'+col+'">'+pct+'<span>%</span></div><div class="rm">'+msg+'</div><div class="rb2"><div class="sc"><div class="sv" style="color:var(--gnbd)">'+sst.correct+'</div><div class="sl">正解</div></div><div class="sc"><div class="sv" style="color:var(--s3)">'+(session.length-sst.correct)+'</div><div class="sl">不正解</div></div><div class="sc"><div class="sv">'+session.length+'</div><div class="sl">合計</div></div></div><div style="display:flex;flex-direction:column;gap:8px"><button class="btn bp" onclick="restart()">もう一度（同条件）</button><button class="btn" onclick="$('fI').value='3';restart()">★★★のみ再挑戦</button><button class="btn" onclick="$('fT').value='calc';restart()">計算問題のみ</button><button class="btn" onclick="go('stats')">単元別成績を確認</button></div></div>';
-  $('prog').style.width='100%';
+  D('qcard').innerHTML=
+    '<div class="rs">'+
+    '<div style="font-size:13px;color:var(--t2)">'+_s.length+'問セッション完了</div>'+
+    '<div class="rsc" style="color:'+col+'">'+pct+'<span>%</span></div>'+
+    '<div class="rm">'+msg+'</div>'+
+    '<div class="rb2">'+
+      '<div class="sc"><div class="sv" style="color:var(--gnbd)">'+_st.ok+'</div><div class="sl">正解</div></div>'+
+      '<div class="sc"><div class="sv" style="color:var(--s3)">'+(_s.length-_st.ok)+'</div><div class="sl">不正解</div></div>'+
+      '<div class="sc"><div class="sv">'+_s.length+'</div><div class="sl">合計</div></div>'+
+    '</div>'+
+    '<div style="display:flex;flex-direction:column;gap:8px">'+
+      '<button class="btn bp" onclick="restart()">もう一度（同条件）</button>'+
+      '<button class="btn" onclick="D('fI').value='3';restart()">★★★のみ再挑戦</button>'+
+      '<button class="btn" onclick="D('fT').value='calc';restart()">計算問題のみ</button>'+
+      '<button class="btn" onclick="go('stats')">単元別成績を確認</button>'+
+    '</div></div>';
+  D('prog').style.width='100%';
 }
 
-function renderHist(){
-  var el=$('hst');
-  if(!history.length){el.innerHTML='<div style="color:var(--t2);font-size:14px;padding:8px">まだ回答履歴がありません</div>';return;}
-  var rows=history.slice(0,40).map(function(h){
-    return '<div class="hr"><div class="dot '+(h.ok?'dok':'dng')+'"></div><span class="bg '+bc(h.i)+'" style="flex-shrink:0">'+st(h.i)+'</span><span class="bt" style="flex-shrink:0">'+tl(h.t)+'</span><span style="font-size:12px;color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+h.q.slice(0,48)+'…</span></div>';
-  });
-  el.innerHTML='<div style="font-size:13px;font-weight:600;margin-bottom:10px">直近の回答履歴</div>'+rows.join('');
+function rHist(){
+  var el=D('hst');
+  if(!_h.length){el.innerHTML='<div style="color:var(--t2);font-size:14px;padding:8px">まだ回答履歴がありません</div>';return;}
+  var html='<div style="font-size:13px;font-weight:600;margin-bottom:10px">直近の回答履歴</div>';
+  var items=_h.slice(0,40);
+  for(var i=0;i<items.length;i++){
+    var h=items[i];
+    html+='<div class="hr">'+
+      '<div class="dot '+(h.ok?'dok':'dng')+'"></div>'+
+      '<span class="bg '+_bc(h.i)+'" style="flex-shrink:0">'+_star(h.i)+'</span>'+
+      '<span class="bt" style="flex-shrink:0">'+_tl(h.t)+'</span>'+
+      '<span style="font-size:12px;color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+h.q.slice(0,48)+'</span>'+
+    '</div>';
+  }
+  el.innerHTML=html;
 }
 
-function renderStats(){
-  var el=$('sts');
-  var entries=Object.entries(uPerf);
+function rStats(){
+  var el=D('sts');
+  var entries=Object.keys(_up).sort();
   if(!entries.length){el.innerHTML='<div style="color:var(--t2);font-size:14px;padding:8px">まだデータがありません</div>';return;}
-  var tot=entries.reduce(function(a,b){return a+b[1].total;},0);
-  var ok=entries.reduce(function(a,b){return a+b[1].correct;},0);
+  var tot=0,ok=0;
+  for(var k in _up){tot+=_up[k].n;ok+=_up[k].ok;}
   var overall=tot?Math.round(ok/tot*100):0;
   var oc=overall>=80?'var(--gnbd)':overall>=60?'var(--s2)':'var(--s3)';
-  var rows=entries.sort(function(a,b){return a[0]<b[0]?-1:1;}).map(function(e){
-    var u=e[0],d=e[1],p=Math.round(d.correct/d.total*100),c=p>=80?'var(--gnbd)':p>=60?'var(--s2)':'var(--s3)';
-    return '<div class="ur"><span class="bg '+bc(d.i)+'" style="flex-shrink:0">'+st(d.i)+'</span><span style="font-size:12px;flex:1">'+u+'</span><span style="font-size:11px;color:var(--t2)">'+d.correct+'/'+d.total+'</span><div class="ubw"><div class="ub" style="width:'+p+'%;background:'+c+'"></div></div><span style="font-size:13px;font-weight:700;color:'+c+';min-width:36px;text-align:right">'+p+'%</span></div>';
-  });
-  el.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><span style="font-size:14px;font-weight:600">単元別正解率</span><span style="font-size:13px;font-weight:700;color:'+oc+'">'+ok+'/'+tot+'問 '+overall+'%</span></div>'+rows.join('');
+  var rows='';
+  for(var j=0;j<entries.length;j++){
+    var u=entries[j],d=_up[u];
+    var p=Math.round(d.ok/d.n*100),c=p>=80?'var(--gnbd)':p>=60?'var(--s2)':'var(--s3)';
+    rows+='<div class="ur">'+
+      '<span class="bg '+_bc(d.i)+'" style="flex-shrink:0">'+_star(d.i)+'</span>'+
+      '<span style="font-size:12px;flex:1">'+u+'</span>'+
+      '<span style="font-size:11px;color:var(--t2)">'+d.ok+'/'+d.n+'</span>'+
+      '<div class="ubw"><div class="ub" style="width:'+p+'%;background:'+c+'"></div></div>'+
+      '<span style="font-size:13px;font-weight:700;color:'+c+';min-width:36px;text-align:right">'+p+'%</span>'+
+    '</div>';
+  }
+  el.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><span style="font-size:14px;font-weight:600">単元別正解率</span><span style="font-size:13px;font-weight:700;color:'+oc+'">'+ok+'/'+tot+'問 '+overall+'%</span></div>'+rows;
 }
 
-function renderHome(){
-  var el=$('hbody');
-  var entries=Object.entries(uPerf);
-  var tot=entries.reduce(function(a,b){return a+b[1].total;},0);
-  var ok=entries.reduce(function(a,b){return a+b[1].correct;},0);
+function rHome(){
+  var el=D('hbody');
+  var tot=0,ok=0;
+  for(var k in _up){tot+=_up[k].n;ok+=_up[k].ok;}
   var rate=tot?Math.round(ok/tot*100):0;
   var rc=rate>=80?'var(--gnbd)':rate>=60?'var(--s2)':'var(--s3)';
   var exam=new Date('2026-06-07'),now=new Date();
-  var daysLeft=Math.max(0,Math.round((exam-now)/(1000*60*60*24)));
-  var elapsed=Math.max(0,84-daysLeft);
-  var phase=elapsed<28?1:elapsed<56?2:elapsed<77?3:4;
+  var dl=Math.max(0,Math.round((exam-now)/(86400000)));
+  var el2=Math.max(0,84-dl);
+  var ph=el2<28?1:el2<56?2:el2<77?3:4;
   var phL=['Ph1 経済','Ph2 財務','Ph3 証券分析','Ph4 仕上げ'];
   var phC=['#C0392B','#C9943C','#065A82','#1A6640'];
   var allU=['1-1 株式評価','1-2 パフォーマンス評価','1-3 債券分析','1-4 デリバティブ','1-5 資産配分','1-6 国際証券投資','1-7 オルタナティブ','1-8 行動ファイナンス','2-1 コーポレートF','2-2 会計制度','2-3 財務諸表分析','3-1 マクロ経済学','3-2 国際金融','3-3 ミクロ経済学','4-1 職業倫理'];
-  var uData=allU.map(function(u){
-    var key=Object.keys(uPerf).find(function(k){return k===u||u.indexOf(k.split(' ')[0])===0;});
-    var d=key?uPerf[key]:null;
-    return {u:u,pct:d?Math.round(d.correct/d.total*100):-1,n:d?d.total:0};
-  }).sort(function(a,b){return a.pct-b.pct;});
-  var weak=uData.filter(function(d){return d.pct>=0&&d.pct<60;}).slice(0,4);
-  var unt=uData.filter(function(d){return d.pct<0;}).slice(0,3);
+  var weak=[],unt=[];
+  for(var i=0;i<allU.length;i++){
+    var u=allU[i];
+    var key=null;
+    var ukeys=Object.keys(_up);
+    for(var j=0;j<ukeys.length;j++){if(u===ukeys[j]||u.indexOf(ukeys[j].split(' ')[0])===0){key=ukeys[j];break;}}
+    var d=key?_up[key]:null;
+    var p=d?Math.round(d.ok/d.n*100):-1;
+    if(p>=0&&p<60&&weak.length<4) weak.push({u:u,p:p});
+    if(p<0&&unt.length<3) unt.push(u);
+  }
   var adv='';
-  if(!tot)adv='まず★★★フィルターで問題を解いてみましょう。自分の正解率を把握することが最初のステップです。';
-  else if(rate<50)adv='★★★の問題だけに絞って10問ずつ解き、解説を丁寧に読む習慣をつけましょう。';
-  else if(weak.length)adv='苦手単元「'+weak[0].u+'」の集中演習をおすすめします。';
-  else if(unt.length)adv='まだ演習していない単元「'+unt[0].u+'」があります。';
+  if(!tot) adv='まず★★★フィルターで問題を解いてみましょう。';
+  else if(rate<50) adv='★★★の問題だけに絞って10問ずつ解き解説を丁寧に読む習慣をつけましょう。';
+  else if(weak.length) adv='苦手単元「'+weak[0].u+'」の集中演習をおすすめします。';
+  else if(unt.length) adv='まだ演習していない単元「'+unt[0]+'」があります。';
   else adv='全単元に取り組んでいます！正解率80%以上を目指して計算問題を重点的に復習しましょう。';
-  var radius=36,circ=2*Math.PI*radius;
+  var R=36,circ=2*Math.PI*R;
   var offset=rate>0?circ*(1-rate/100):circ;
   var ringC=rate>=80?'#1D9E75':rate>=60?'#C9943C':'#C0392B';
-  var weakHtml=weak.length?'<div class="st">⚠️ 苦手単元（正解率60%未満）</div><div class="wl">'+weak.map(function(d){var c=d.pct<40?'var(--s3)':'var(--s2)';return '<div class="wi"><div class="wu">'+d.u+'</div><div class="wbw"><div class="wb" style="width:'+d.pct+'%;background:'+c+'"></div></div><div class="wp" style="color:'+c+'">'+d.pct+'%</div></div>';}).join('')+'</div>':'';
-  var untHtml=unt.length?'<div class="st">📋 未演習単元</div><div class="wl">'+unt.map(function(d){return '<div class="wi"><div class="wu">'+d.u+'</div><span style="font-size:11px;color:var(--t3);margin-left:auto">未演習</span></div>';}).join('')+'</div>':'';
-  el.innerHTML='<div style="padding-bottom:8px"><div style="font-size:17px;font-weight:500;margin-bottom:14px">こんにちは！<span style="color:var(--ac)">6月の合格</span>に向けて今日も進めましょう 💪</div><div class="st">残り日数・正解率</div><div class="kg"><div class="ki"><div class="kv" style="color:var(--s3)">'+daysLeft+'</div><div class="kl">試験まで（日）</div><div class="ks">6月7日（予定）</div></div><div class="ki"><div class="kv" style="color:'+rc+'">'+(rate?rate+'%':'--')+'</div><div class="kl">総合正解率</div><div class="ks">'+ok+'/'+tot+'問</div></div></div><div class="rr"><svg width="88" height="88" viewBox="0 0 88 88" style="flex-shrink:0"><circle cx="44" cy="44" r="'+radius+'" fill="none" stroke="#E2E5EF" stroke-width="8"/><circle cx="44" cy="44" r="'+radius+'" fill="none" stroke="'+ringC+'" stroke-width="8" stroke-dasharray="'+circ.toFixed(1)+'" stroke-dashoffset="'+offset.toFixed(1)+'" stroke-linecap="round" transform="rotate(-90 44 44)"/><text x="44" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="'+ringC+'">'+rate+'%</text></svg><div style="flex:1"><div style="font-size:26px;font-weight:700;color:'+rc+'">'+rate+'%</div><div style="font-size:12px;color:var(--t2);margin-top:2px">現在の正解率</div><div style="font-size:11px;color:var(--t3);margin-top:4px">目標：65%以上で合格圏</div><div style="font-size:11px;color:var(--t3)">解答済み '+tot+'問 ／ 全'+QDB.length+'問</div></div></div><div class="st">フェーズ進捗</div><div class="ph-bar">'+phL.map(function(l,i){return '<div class="ph" style="flex:'+(i===phase-1?2:1)+';background:'+phC[i]+';opacity:'+(i<phase?1:0.35)+'">'+l+'</div>';}).join('')+'</div><div style="font-size:11px;color:var(--t2);margin-bottom:16px">現在 Phase '+phase+'：'+phL[phase-1]+' ／ 残り'+daysLeft+'日</div><div class="st">クイックスタート</div><div class="qbg"><button class="qb qbp" onclick="$('fI').value='3';go('quiz');restart()">★★★ 10問スタート</button><button class="qb" onclick="$('fT').value='calc';go('quiz');restart()">計算問題だけ</button><button class="qb" onclick="$('fU').value='1-3';go('quiz');restart()">債券分析を解く</button><button class="qb" onclick="$('fU').value='all';$('fI').value='all';go('quiz');restart()">ランダム10問</button></div>'+weakHtml+untHtml+'<div class="st">今日のアドバイス</div><div class="adv"><div class="al">今日のポイント</div><div class="at">'+adv+'</div></div></div>';
+  var phHTML='';
+  for(var i=0;i<phL.length;i++){
+    phHTML+='<div class="ph" style="flex:'+(i===ph-1?2:1)+';background:'+phC[i]+';opacity:'+(i<ph?1:0.35)+'">'+phL[i]+'</div>';
+  }
+  var weakHTML='';
+  if(weak.length){
+    weakHTML='<div class="st">&#9888; 苦手単元（60%未満）</div><div class="wl">';
+    for(var i=0;i<weak.length;i++){
+      var c=weak[i].p<40?'var(--s3)':'var(--s2)';
+      weakHTML+='<div class="wi"><div class="wu">'+weak[i].u+'</div><div class="wbw"><div class="wb" style="width:'+weak[i].p+'%;background:'+c+'"></div></div><div class="wp" style="color:'+c+'">'+weak[i].p+'%</div></div>';
+    }
+    weakHTML+='</div>';
+  }
+  var untHTML='';
+  if(unt.length){
+    untHTML='<div class="st">&#128203; 未演習単元</div><div class="wl">';
+    for(var i=0;i<unt.length;i++){
+      untHTML+='<div class="wi"><div class="wu">'+unt[i]+'</div><span style="font-size:11px;color:var(--t3);margin-left:auto">未演習</span></div>';
+    }
+    untHTML+='</div>';
+  }
+  el.innerHTML=
+    '<div style="padding-bottom:8px">'+
+    '<div style="font-size:17px;font-weight:500;margin-bottom:14px">こんにちは！<span style="color:var(--ac)">6月の合格</span>に向けて今日も進めましょう</div>'+
+    '<div class="st">残り日数・正解率</div>'+
+    '<div class="kg">'+
+      '<div class="ki"><div class="kv" style="color:var(--s3)">'+dl+'</div><div class="kl">試験まで（日）</div><div class="ks">6月7日（予定）</div></div>'+
+      '<div class="ki"><div class="kv" style="color:'+rc+'">'+(rate?rate+'%':'--')+'</div><div class="kl">総合正解率</div><div class="ks">'+ok+'/'+tot+'問</div></div>'+
+    '</div>'+
+    '<div class="rr">'+
+      '<svg width="88" height="88" viewBox="0 0 88 88" style="flex-shrink:0">'+
+        '<circle cx="44" cy="44" r="'+R+'" fill="none" stroke="#E2E5EF" stroke-width="8"/>'+
+        '<circle cx="44" cy="44" r="'+R+'" fill="none" stroke="'+ringC+'" stroke-width="8" stroke-dasharray="'+circ.toFixed(1)+'" stroke-dashoffset="'+offset.toFixed(1)+'" stroke-linecap="round" transform="rotate(-90 44 44)"/>'+
+        '<text x="44" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="'+ringC+'">'+rate+'%</text>'+
+      '</svg>'+
+      '<div style="flex:1">'+
+        '<div style="font-size:26px;font-weight:700;color:'+rc+'">'+rate+'%</div>'+
+        '<div style="font-size:12px;color:var(--t2);margin-top:2px">現在の正解率</div>'+
+        '<div style="font-size:11px;color:var(--t3);margin-top:4px">目標：65%以上で合格圏</div>'+
+        '<div style="font-size:11px;color:var(--t3)">解答済み '+tot+'問 ／ 全'+QDB.length+'問</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="st">フェーズ進捗</div>'+
+    '<div class="phb">'+phHTML+'</div>'+
+    '<div style="font-size:11px;color:var(--t2);margin-bottom:16px">現在 Phase '+ph+'：'+phL[ph-1]+' ／ 残り'+dl+'日</div>'+
+    '<div class="st">クイックスタート</div>'+
+    '<div class="qbg">'+
+      '<button class="qb qbp" onclick="D('fI').value='3';go('quiz');restart()">★★★ 10問スタート</button>'+
+      '<button class="qb" onclick="D('fT').value='calc';go('quiz');restart()">計算問題だけ</button>'+
+      '<button class="qb" onclick="D('fU').value='1-3';go('quiz');restart()">債券分析を解く</button>'+
+      '<button class="qb" onclick="D('fU').value='all';D('fI').value='all';go('quiz');restart()">ランダム10問</button>'+
+    '</div>'+
+    weakHTML+untHTML+
+    '<div class="st">今日のアドバイス</div>'+
+    '<div class="adv"><div class="advl">今日のポイント</div><div class="advt">'+adv+'</div></div>'+
+    '</div>';
 }
 
 function init(){
-  var sel=$('fU');
-  var units=[];
-  QDB.forEach(function(q){if(units.indexOf(q.u)===-1)units.push(q.u);});
-  units.sort().forEach(function(u){
-    var o=document.createElement('option');
-    o.value=u.split(' ')[0];o.textContent=u;sel.appendChild(o);
-  });
+  var sel=D('fU');
+  var seen={};
+  for(var i=0;i<QDB.length;i++){
+    var u=QDB[i].u;
+    if(!seen[u]){
+      seen[u]=1;
+      var o=document.createElement('option');
+      o.value=u.split(' ')[0]; o.textContent=u;
+      sel.appendChild(o);
+    }
+  }
+  // Sort options
+  var opts=Array.prototype.slice.call(sel.options,1);
+  opts.sort(function(a,b){return a.text<b.text?-1:1;});
+  while(sel.options.length>1) sel.remove(1);
+  for(var i=0;i<opts.length;i++) sel.appendChild(opts[i]);
   build();
-  renderHome();
+  rHome();
 }
 init();
 </script>
