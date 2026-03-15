@@ -92,7 +92,7 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
     <button class="tab on" onclick="go('home')">ホーム</button>
     <button class="tab" onclick="go('quiz')">問題演習</button>
     <button class="tab" onclick="go('hist')">履歴</button>
-    <button class="tab" onclick="go('stats')">成績</button>
+    <button class="tab" onclick="_gs()">成績</button>
     <button class="tab" onclick="go('info')">使い方</button>
   </div>
 </div>
@@ -896,9 +896,9 @@ function showR(){
     '</div>'+
     '<div style="display:flex;flex-direction:column;gap:8px">'+
       '<button class="btn bp" onclick="restart()">もう一度（同条件）</button>'+
-      '<button class="btn" onclick="D('fI').value='3';restart()">★★★のみ再挑戦</button>'+
-      '<button class="btn" onclick="D('fT').value='calc';restart()">計算問題のみ</button>'+
-      '<button class="btn" onclick="go('stats')">単元別成績を確認</button>'+
+      '<button class="btn" onclick="_q1()">★★★のみ再挑戦</button>'+
+      '<button class="btn" onclick="_q2()">計算問題のみ</button>'+
+      '<button class="btn" onclick="_gs()">単元別成績を確認</button>'+
     '</div></div>';
   D('prog').style.width='100%';
 }
@@ -1023,16 +1023,25 @@ function rHome(){
     '<div style="font-size:11px;color:var(--t2);margin-bottom:16px">現在 Phase '+ph+'：'+phL[ph-1]+' ／ 残り'+dl+'日</div>'+
     '<div class="st">クイックスタート</div>'+
     '<div class="qbg">'+
-      '<button class="qb qbp" onclick="D('fI').value='3';go('quiz');restart()">★★★ 10問スタート</button>'+
-      '<button class="qb" onclick="D('fT').value='calc';go('quiz');restart()">計算問題だけ</button>'+
-      '<button class="qb" onclick="D('fU').value='1-3';go('quiz');restart()">債券分析を解く</button>'+
-      '<button class="qb" onclick="D('fU').value='all';D('fI').value='all';go('quiz');restart()">ランダム10問</button>'+
+      '<button class="qb qbp" onclick="_q5()">★★★ 10問スタート</button>'+
+      '<button class="qb" onclick="_q6()">計算問題だけ</button>'+
+      '<button class="qb" onclick="_q3()">債券分析を解く</button>'+
+      '<button class="qb" onclick="_q4()">ランダム10問</button>'+
     '</div>'+
     weakHTML+untHTML+
     '<div class="st">今日のアドバイス</div>'+
     '<div class="adv"><div class="advl">今日のポイント</div><div class="advt">'+adv+'</div></div>'+
     '</div>';
 }
+
+
+function _q1(){document.getElementById('fI').value='3';restart();}
+function _q2(){document.getElementById('fT').value='calc';restart();}
+function _q3(){document.getElementById('fU').value='1-3';go('quiz');restart();}
+function _q4(){document.getElementById('fU').value='all';document.getElementById('fI').value='all';go('quiz');restart();}
+function _q5(){document.getElementById('fI').value='3';go('quiz');restart();}
+function _q6(){document.getElementById('fT').value='calc';go('quiz');restart();}
+function _gs(){_gs();}
 
 function init(){
   var sel=D('fU');
