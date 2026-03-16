@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
 <meta name="color-scheme" content="light">
 <meta name="supported-color-schemes" content="light">
+<link rel="manifest" href="/cma-quiz/manifest.json">
+<meta name="theme-color" content="#0D1B3E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="CMA演習">
@@ -64,9 +66,9 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
 .ch:active:not([disabled]){background:#F0F4FF}.ch[disabled]{cursor:default}
 .cl{font-size:13px;font-weight:600;color:var(--t2);min-width:18px;margin-top:1px;flex-shrink:0}
 .ct{font-size:14px;line-height:1.55;color:#1A1A2E}
-.ch.ok{border-color:var(--gnbd);background:var(--gnb)}.ch.ok .cl,.ch.ok .ct{color:var(--gn)}
-.ch.ng{border-color:var(--rbd);background:var(--rb)}.ch.ng .cl,.ch.ng .ct{color:var(--s3dk)}
-.ch.rv{border-color:var(--gnbd);background:var(--gnb)}.ch.rv .cl,.ch.rv .ct{color:var(--gn)}
+.ch.ok{border-color:#1D9E75!important;background:#E1F5EE!important}.ch.ok .cl,.ch.ok .ct{color:#085041!important}
+.ch.ng{border-color:#A32D2D!important;background:#FCEBEB!important}.ch.ng .cl,.ch.ng .ct{color:#791F1F!important}
+.ch.rv{border-color:#1D9E75!important;background:#E1F5EE!important}.ch.rv .cl,.ch.rv .ct{color:#085041!important}
 .ep{margin-top:12px;padding:12px 14px;background:#F0F6FF;border-radius:var(--rs);border-left:3px solid var(--acm);display:none}
 .el{font-size:11px;font-weight:600;color:var(--ac);margin-bottom:5px}.et{font-size:13px;line-height:1.7}
 .act{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
@@ -1831,7 +1833,7 @@ function ans(idx){
   _st.n++; if(ok) _st.ok++;
   btns[idx].classList.add(ok?'ok':'ng');
   if(!ok) btns[q.a].classList.add('rv');
-  D('et').textContent=q.e;
+  var L=['A','B','C','D'];D('ep').innerHTML='<div class="el">解説</div><div style="display:inline-flex;align-items:center;gap:6px;background:#E1F5EE;border:1.5px solid #1D9E75;border-radius:6px;padding:5px 12px;margin-bottom:10px"><span style="font-size:13px;font-weight:700;color:#085041">✓ 正解：'+L[q.a]+'</span></div><div class="et" id="et"></div>';D('et').textContent=q.e;
   D('ep').style.display='block';
   _h.unshift({q:q.q,u:q.u,ok:ok,i:q.i,t:q.t});
   if(!_up[q.u]) _up[q.u]={n:0,ok:0,i:q.i};
@@ -2037,6 +2039,9 @@ function init(){
 }
 init();
 
+</script>
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/cma-quiz/sw.js');});}
 </script>
 </body>
 </html>
