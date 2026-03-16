@@ -98,9 +98,9 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
 .adv{background:var(--cd);border:1px solid var(--br);border-radius:var(--rs);padding:14px;border-left:3px solid var(--acm)}
 .advl{font-size:11px;color:var(--acm);font-weight:600;margin-bottom:5px}.advt{font-size:13px;line-height:1.7}
 /* Reference pane - full height 2-col layout */
-#pane-ref{height:calc(100vh - 90px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
+#pane-ref{height:calc(100vh - 90px - env(safe-area-inset-top) - env(safe-area-inset-bottom));;min-height:0}
 #pane-ref.on{display:flex!important}
-#ref-sb{width:236px;min-width:236px;background:var(--cd);border-right:1px solid var(--br);overflow-y:auto;flex-shrink:0;position:relative}
+#ref-sb{display:block;width:236px;min-width:236px;background:#ffffff;border-right:1px solid #E2E5EF;overflow-y:auto;flex-shrink:0}
 #ref-sb-top{padding:10px 14px;background:#F8F9FB;border-bottom:1px solid #E2E5EF;font-size:11px;font-weight:600;color:#6B7A99;text-transform:uppercase;letter-spacing:.05em;position:sticky;top:0;z-index:15}
 .ref-tu:hover{background:var(--bg)}
 #ref-main{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
@@ -109,10 +109,7 @@ select{font-size:12px;padding:6px 24px 6px 8px;border:1px solid var(--br2);borde
 @media(max-width:680px){
   #ref-mob{display:flex;position:sticky;top:0;z-index:20;background:#F8F9FB;width:100%}
   #ref-sb{display:none;position:fixed;top:0;left:0;width:82%;max-width:288px;height:100vh;z-index:500;padding-top:calc(90px + env(safe-area-inset-top));overflow-y:auto}
-}
-  #ref-sb{display:none;position:fixed;top:0;left:0;width:82%;max-width:288px;height:100vh;z-index:500;padding-top:calc(90px + env(safe-area-inset-top));overflow-y:auto}
-}
-</style>
+}</style>
 </head>
 <body>
 <div class="hdr">
